@@ -10,7 +10,7 @@ public class Rating {
     private int deliveryRating;
     private int accuracyOfRating;
 
-    protected Rating(){}
+    public Rating(){}
 
     private Rating(Builder builder){
         overAllRating = builder.overAllRating;
