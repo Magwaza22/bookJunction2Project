@@ -1,15 +1,14 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-public class Author {
-
-    @Id
-    private Long authorID;
+@Embeddable
+public class Author implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
@@ -21,17 +20,11 @@ public class Author {
     }
 
     public Author(Builder builder){
-        this.authorID = builder.authorID;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.email = builder.email;
         this.phoneNumber = builder.phoneNumber;
         this.nationality = builder.nationality;
-
-    }
-
-    public Long getAuthorID() {
-        return authorID;
     }
 
     public String getFirstName() {
@@ -58,18 +51,17 @@ public class Author {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Author author)) return false;
-        return Objects.equals(getAuthorID(), author.getAuthorID()) && Objects.equals(getFirstName(), author.getFirstName()) && Objects.equals(getLastName(), author.getLastName()) && Objects.equals(getEmail(), author.getEmail()) && Objects.equals(getPhoneNumber(), author.getPhoneNumber()) && Objects.equals(getNationality(), author.getNationality());
+        return Objects.equals(getFirstName(), author.getFirstName()) && Objects.equals(getLastName(), author.getLastName()) && Objects.equals(getEmail(), author.getEmail()) && Objects.equals(getPhoneNumber(), author.getPhoneNumber()) && Objects.equals(getNationality(), author.getNationality());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAuthorID(), getFirstName(), getLastName(), getEmail(), getPhoneNumber(), getNationality());
+        return Objects.hash(getFirstName(), getLastName(), getEmail(), getPhoneNumber(), getNationality());
     }
 
     @Override
     public String toString() {
         return "Author{" +
-                "authorID=" + authorID +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
@@ -79,17 +71,12 @@ public class Author {
     }
 
     public static class Builder {
-        private Long authorID;
         private String firstName;
         private String lastName;
         private String email;
         private String phoneNumber;
         private String nationality;
 
-        public Builder setAuthorID(Long authorID) {
-            this.authorID = authorID;
-            return this;
-        }
 
         public Builder setFirstName(String firstName) {
             this.firstName = firstName;
@@ -117,7 +104,6 @@ public class Author {
         }
 
         public Builder copy(Author a) {
-            this.authorID = a.authorID;
             this.firstName = a.firstName;
             this.lastName = a.lastName;
             this.email = a.email;
