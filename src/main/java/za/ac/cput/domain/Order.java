@@ -1,9 +1,14 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class Order {
+    @Id
     private int orderID;
     private int userID;
     private int listingID;
