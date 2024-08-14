@@ -1,5 +1,7 @@
 package za.ac.cput.util;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.util.UUID;
 
 public class Helper {
@@ -23,6 +25,17 @@ public class Helper {
 
     public static boolean generateId() {
         return true;
+    }
+
+    public static boolean isValidEmail(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
     }
 
 }

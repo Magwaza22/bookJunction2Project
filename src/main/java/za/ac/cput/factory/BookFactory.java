@@ -22,4 +22,8 @@ public class BookFactory {
                 .setPrice(price)
                 .build();
     }
+
+    public static Book buildBook(Long bookID, byte[] bookPhoto, String ISBN, String title, String edition, Author author,Double price) {
+        throw new UnsupportedOperationException();
+    }
 }

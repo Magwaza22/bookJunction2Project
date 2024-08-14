@@ -9,7 +9,8 @@ public class AuthorFactory {
 
     public static Author createAuthor(String firstName, String lastName, String email, String phoneNumber, String nationality) {
         if (Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName)
-                || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(phoneNumber) || Helper.isNullOrEmpty(nationality))
+                || Helper.isNullOrEmpty(String.valueOf(Helper.isValidEmail(email))) || Helper.isNullOrEmpty(phoneNumber)
+                || Helper.isNullOrEmpty(nationality))
             return null;
 
         return new Author.Builder().setFirstName(firstName)
