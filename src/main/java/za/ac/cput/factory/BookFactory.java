@@ -8,9 +8,9 @@ import java.util.Arrays;
 
 public class BookFactory {
     public static Book createBook(Long bookID , byte[] bookPhoto, String ISBN, String title, String edition, Author author, Double price) {
-        if (Helper.isNullOrEmpty(String.valueOf(bookID)) || Helper.isNullOrEmpty(Arrays.toString((bookPhoto)))
-                || Helper.isNullOrEmpty((ISBN)) || Helper.isNullOrEmpty((title)) || Helper.isNullOrEmpty((edition))
-                || Helper.isNullOrEmpty(String.valueOf((author))) || Helper.isNullOrEmpty(String.valueOf((price))) )
+        if (Helper.isNullOrEmpty(String.valueOf(bookID)) || Helper.isNullOrEmpty(Arrays.toString(bookPhoto))
+                || Helper.isNullOrEmpty(ISBN) || Helper.isNullOrEmpty(title) || Helper.isNullOrEmpty(edition)
+                || Helper.isNullOrEmpty(String.valueOf(author)) || Helper.isNullOrEmpty(String.valueOf(price)) )
             return null;
 
         return new Book.Builder().setBookID(bookID)
