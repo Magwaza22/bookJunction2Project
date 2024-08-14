@@ -1,14 +1,20 @@
 package za.ac.cput.domain;
 
 
-import java.util.Objects;
+import jakarta.persistence.Entity;
+import org.springframework.data.annotation.Id;
 
+import java.util.Objects;
+@Entity
 public class Admin {
+  @Id
   private Long adminID;
   private String name;
   private String email;
   private String password;
   private String phoneNumber;
+  @jakarta.persistence.Id
+  private Long id;
 
   // Default constructor
   public Admin() {}
@@ -101,6 +107,14 @@ public class Admin {
             ", email='" + email + '\'' +
             ", phoneNumber='" + phoneNumber + '\'' +
             '}';
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Long getId() {
+    return id;
   }
 
   // Builder pattern implementation
