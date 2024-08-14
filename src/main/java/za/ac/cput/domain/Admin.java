@@ -4,6 +4,7 @@ package za.ac.cput.domain;
 import jakarta.persistence.Entity;
 import org.springframework.data.annotation.Id;
 
+import javax.sql.RowSet;
 import java.util.Objects;
 @Entity
 public class Admin {
@@ -153,5 +154,7 @@ public class Admin {
     public Admin build() {
       return new Admin(adminID, name, email, password, phoneNumber);
     }
+
+
   }
 }

@@ -10,6 +10,7 @@ public class AdminFactory {
                 || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(password) || Helper.isNullOrEmpty(phoneNumber)) {
             return null;
         }
+        String AdminId = String.valueOf(Helper.generateId());
 
         return new Admin.Builder()
                 .setAdminID(adminID)
