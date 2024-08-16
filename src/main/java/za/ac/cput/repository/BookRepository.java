@@ -6,4 +6,6 @@ import za.ac.cput.domain.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
+    Book findBookByISBN (String ISBN);
+    Book findAllBy (Long bookId);
 }
