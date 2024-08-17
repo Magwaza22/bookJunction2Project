@@ -31,15 +31,14 @@ public class BookService implements IBookService{
         return bookRepository.save(book);
     }
 
-
+    @Override
+    public void delete(Long booKID) {
+        bookRepository.delete(booKID);
+    }
 
     @Override
     public List<Book> getAll() {
         return bookRepository.findAll();
     }
 
-    @Override
-    public void delete(Long booKID) {
-        bookRepository.delete(booKID);
-    }
 }
