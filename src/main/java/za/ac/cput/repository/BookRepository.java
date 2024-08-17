@@ -8,4 +8,6 @@ import za.ac.cput.domain.Book;
 public interface BookRepository extends JpaRepository<Book, Long> {
     Book findBookByISBN (String ISBN);
     Book findAllBy (Long bookId);
+
+    void delete(Long booKID);
 }

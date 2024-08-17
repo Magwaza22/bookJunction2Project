@@ -7,4 +7,5 @@ import java.util.List;
 public interface IBookService extends IService<Book, Long>{
     List<Book> getAll();
 
+    void delete(Long booKID);
 }

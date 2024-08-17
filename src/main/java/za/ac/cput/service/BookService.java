@@ -1,7 +1,6 @@
 package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Book;
 import za.ac.cput.repository.BookRepository;
@@ -32,13 +31,15 @@ public class BookService implements IBookService{
         return bookRepository.save(book);
     }
 
-    @Override
-    public boolean delete(Long aLong) {
-        return false;
-    }
+
 
     @Override
     public List<Book> getAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long booKID) {
+        bookRepository.delete(booKID);
     }
 }
