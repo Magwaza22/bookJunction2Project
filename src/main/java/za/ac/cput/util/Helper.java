@@ -38,4 +38,8 @@ public class Helper {
         return result;
     }
 
+    public static boolean isValidId(Object adminId) {
+        return false;
+    }
 }
+

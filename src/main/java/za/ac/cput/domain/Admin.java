@@ -118,6 +118,10 @@ public class Admin {
     return id;
   }
 
+  public Object getAdminId() {
+      return null;
+  }
+
   // Builder pattern implementation
   public static class Builder {
     private Long adminID;

@@ -14,7 +14,7 @@ public class Seller {
     private String email;
     private String phoneNumber;
 
-    protected Seller() {
+    public Seller() {
     }
 
     private Seller(Builder builder) {
@@ -64,6 +64,36 @@ public class Seller {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+
+    public String getLastName() {
+        return null;
+    }
+
+    public String getFirstName() {
+        return null;
+    }
+
+    public void setFirstName(String updatedFirstName) {
+    }
+
+    public void setEmail(String updatedEmail) {
+    }
+
+    public void setLastName(String updatedLastName) {
+    }
+
+    public void setPhoneNumber(String updatedPhoneNumber) {
+    }
+
+    public void setId(long l) {
+    }
+
+    public void setName(String testSeller) {
+    }
+
+    public String getId() {
+        return null;
     }
 
     public static class Builder {
