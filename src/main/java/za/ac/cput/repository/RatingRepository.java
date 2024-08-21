@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Rating;
 
 @Repository
-public interface RatingRepository extends JpaRepository<Rating, String> {
+public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
-    Rating findByReviewID(String reviewID) ;
+    Rating findByOverAllRating(Integer OverAllRating) ;
 
 }
