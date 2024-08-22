@@ -6,6 +6,7 @@ import za.ac.cput.util.Helper;
 public class AdminFactory {
 
     public static Admin createAdmin(Long adminID, String name, String email, String password, String phoneNumber) {
+        adminID = null;
         if (Helper.isNullOrEmpty(String.valueOf(adminID)) || Helper.isNullOrEmpty(name)
                 || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(password) || Helper.isNullOrEmpty(phoneNumber)) {
             return null;
