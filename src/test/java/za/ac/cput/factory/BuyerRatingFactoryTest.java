@@ -6,7 +6,7 @@ import za.ac.cput.domain.CustomerRating;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CustomerRatingFactoryTest {
+class BuyerRatingFactoryTest {
     private int overAllRating;
     private int bookConditionRating;
     private int sellerReliabilityRating;
@@ -19,8 +19,8 @@ class CustomerRatingFactoryTest {
 
     @BeforeEach
     void setup(){
-        user1= RatingFactory.rateBuild(4,3,4,3,2,5);
-        user2= RatingFactory.rateBuild(3,5,6,8,3,4);
+        user1= BuyerRatingFactory.rateBuild(4,3,4,3,2,5);
+        user2= BuyerRatingFactory.rateBuild(3,5,6,8,3,4);
     }
 
     @Test

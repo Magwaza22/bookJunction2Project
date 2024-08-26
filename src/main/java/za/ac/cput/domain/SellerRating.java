@@ -72,6 +72,7 @@ public class SellerRating {
             this.accuracyOfRatingB = accuracyOfRatingB;
             return this;
         }
+        public SellerRating build(){return new SellerRating(this);}
     }
 
 }

@@ -3,7 +3,7 @@ package za.ac.cput.factory;
 import za.ac.cput.domain.CustomerRating;
 import za.ac.cput.util.Helper;
 
-public class RatingFactory {
+public class BuyerRatingFactory {
 
     public static CustomerRating rateBuild(int overAllRating, int bookConditionRating, int sellerReliabilityRating, int valueRating, int deliveryRating, int accuracyOfRating){
         if (Helper.assertInRange(overAllRating) ||
