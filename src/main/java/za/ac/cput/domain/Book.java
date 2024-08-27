@@ -2,27 +2,32 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
     @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookID;
+
     @Lob
-    @Column(length=100000)
     private byte[] bookPhoto;
+
     private String ISBN;
     private String title;
     private String edition;
-    private Author author;
+
+    @Embedded
+    private Author author; // Embedded relationship
+
     private Double price;
 
-    protected Book(){
-
+    protected Book() {
     }
 
-    public Book(Builder builder){
+    public Book(Builder builder) {
         this.bookID = builder.bookID;
         this.bookPhoto = builder.bookPhoto;
         this.ISBN = builder.ISBN;
@@ -60,12 +65,17 @@ public class Book {
         return price;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Book book)) return false;
-        return Objects.equals(getBookID(), book.getBookID()) && Arrays.equals(getBookPhoto(), book.getBookPhoto()) && Objects.equals(getISBN(), book.getISBN()) && Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getPrice(), book.getPrice());
+        return Objects.equals(getBookID(), book.getBookID()) &&
+                Arrays.equals(getBookPhoto(), book.getBookPhoto()) &&
+                Objects.equals(getISBN(), book.getISBN()) &&
+                Objects.equals(getTitle(), book.getTitle()) &&
+                Objects.equals(getEdition(), book.getEdition()) &&
+                Objects.equals(getAuthor(), book.getAuthor()) &&
+                Objects.equals(getPrice(), book.getPrice());
     }
 
     @Override
@@ -109,12 +119,12 @@ public class Book {
 
         public Builder setISBN(String ISBN) {
             this.ISBN = ISBN;
-            return  this;
+            return this;
         }
 
         public Builder setTitle(String title) {
             this.title = title;
-            return  this;
+            return this;
         }
 
         public Builder setEdition(String edition) {
@@ -132,7 +142,7 @@ public class Book {
             return this;
         }
 
-        public Book.Builder copy(Book b) {
+        public Builder copy(Book b) {
             this.bookID = b.bookID;
             this.bookPhoto = b.bookPhoto;
             this.ISBN = b.ISBN;
@@ -142,9 +152,9 @@ public class Book {
             this.price = b.price;
             return this;
         }
-        public Book build(){
+
+        public Book build() {
             return new Book(this);
         }
-
     }
 }
