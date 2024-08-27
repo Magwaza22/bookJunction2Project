@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Rating {
+public class CustomerRating {
     @Id
     private int overAllRating;
     private int bookConditionRating;
@@ -15,9 +15,9 @@ public class Rating {
     private int deliveryRating;
     private int accuracyOfRating;
 
-    public Rating(){}
+    public CustomerRating(){}
 
-    private Rating(Builder builder){
+    private CustomerRating(Builder builder){
         overAllRating = builder.overAllRating;
         bookConditionRating = builder.bookConditionRating;
         sellerReliabilityRating = builder.sellerReliabilityRating;
@@ -55,8 +55,8 @@ public class Rating {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Rating rating = (Rating) o;
-        return overAllRating == rating.overAllRating && bookConditionRating == rating.bookConditionRating && sellerReliabilityRating == rating.sellerReliabilityRating && valueRating == rating.valueRating && deliveryRating == rating.deliveryRating && accuracyOfRating == rating.accuracyOfRating;
+        CustomerRating customerRating = (CustomerRating) o;
+        return overAllRating == customerRating.overAllRating && bookConditionRating == customerRating.bookConditionRating && sellerReliabilityRating == customerRating.sellerReliabilityRating && valueRating == customerRating.valueRating && deliveryRating == customerRating.deliveryRating && accuracyOfRating == customerRating.accuracyOfRating;
     }
 
     @Override
@@ -113,8 +113,8 @@ public class Rating {
             return this;
         }
 
-        public Rating build(){
-            return new Rating(this);
+        public CustomerRating build(){
+            return new CustomerRating(this);
         }
     }
 }
