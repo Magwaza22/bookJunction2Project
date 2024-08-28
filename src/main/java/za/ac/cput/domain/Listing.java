@@ -1,4 +1,8 @@
+package za.ac.cput.domain;
+
 import jakarta.persistence.*;
+import za.ac.cput.domain.Book;
+import za.ac.cput.domain.User;
 
 import java.time.LocalDate;
 import java.util.Objects;
