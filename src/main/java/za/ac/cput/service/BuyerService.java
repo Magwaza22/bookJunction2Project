@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class BuyerService implements IBuyerService {
-    private BuyerRepository buyerRepository;
+    private final BuyerRepository buyerRepository;
 
     @Autowired
     public BuyerService(BuyerRepository buyerRepository) {
@@ -22,8 +22,8 @@ public class BuyerService implements IBuyerService {
     }
 
     @Override
-    public Buyer read(String id) {
-        return buyerRepository.findById(id).orElse(null);
+    public Buyer read(Long buyerID) {
+        return buyerRepository.findById(String.valueOf(buyerID)).orElse(null);
     }
 
     @Override
@@ -32,13 +32,12 @@ public class BuyerService implements IBuyerService {
     }
 
     @Override
-    public void delete(String buyerId) {
-        buyerRepository.deleteById(buyerId);
-    }
-
-    @Override
     public List<Buyer> getAll() {
         return buyerRepository.findAll();
     }
 
+    @Override
+    public void delete(Long buyerID) {
+        buyerRepository.deleteById(String.valueOf(buyerID));
+    }
 }

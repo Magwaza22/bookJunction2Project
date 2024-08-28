@@ -6,9 +6,7 @@ import za.ac.cput.domain.Buyer;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, String> {
-    Buyer findByBuyerId(String buyerId);
-    Buyer findByEmail(String email);
-    Buyer findByUsername(String username);
+
 
 }
 

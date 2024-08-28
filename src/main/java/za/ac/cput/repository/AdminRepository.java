@@ -4,10 +4,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Admin;
 
+import java.util.Optional;
+
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, String> {
-    Admin findByAdminId(String adminId);
-    Admin findByEmail(String email);
-    Admin findByUsername(String username);
 
+    Optional<Object> findById(Long adminID);
+
+    void deleteById(String id);
 }
