@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class AuthorService implements IAuthorService{
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     @Autowired
     AuthorService(AuthorRepository authorRepository){
@@ -17,21 +17,21 @@ public class AuthorService implements IAuthorService{
     }
     @Override
     public Author create(Author author) {
-        return null;
+        return authorRepository.save(author);
     }
 
     @Override
     public Author read(String s) {
-        return null;
+        return authorRepository.findById(s).orElse(null);
     }
 
     @Override
     public Author update(Author author) {
-        return null;
+        return authorRepository.save(author);
     }
 
     @Override
     public List<Author> getall() {
-        return null;
+        return authorRepository.findAll();
     }
 }
