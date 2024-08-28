@@ -1,18 +1,24 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "customer_order")
 public class Order {
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderID;
-    private int userID;
-    private int listingID;
-    private Date orderDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+
+    private LocalDate orderDate;
+
     private double totalAmount;
     private String orderStatus;
 
@@ -21,8 +27,7 @@ public class Order {
     }
     private Order (Builder builder){
         this.orderID = builder.orderID;
-        this.userID = builder.userID;
-        this.listingID = builder.listingID;
+        this.userId = builder.userId;
         this.orderDate = builder.orderDate;
         this.totalAmount = builder.totalAmount;
         this.orderStatus = builder.orderStatus;
@@ -32,15 +37,11 @@ public class Order {
         return orderID;
     }
 
-    public int getUserID() {
-        return userID;
+    public User getUserID() {
+        return userId;
     }
 
-    public int getListingID() {
-        return listingID;
-    }
-
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
@@ -55,31 +56,31 @@ public class Order {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order order)) return false;
-        return getOrderID() == order.getOrderID() && getUserID() == order.getUserID() && getListingID() == order.getListingID() && Double.compare(getTotalAmount(), order.getTotalAmount()) == 0 && Objects.equals(getOrderDate(), order.getOrderDate()) && Objects.equals(getOrderStatus(), order.getOrderStatus());
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return orderID == order.orderID && Double.compare(totalAmount, order.totalAmount) == 0 && Objects.equals(userId, order.userId) && Objects.equals(orderDate, order.orderDate) && Objects.equals(orderStatus, order.orderStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrderID(), getUserID(), getListingID(), getOrderDate(), getTotalAmount(), getOrderStatus());
+        return Objects.hash(orderID, userId, orderDate, totalAmount, orderStatus);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "orderID=" + orderID +
-                ", userID=" + userID +
-                ", listingID=" + listingID +
+                ", userId=" + userId +
                 ", orderDate=" + orderDate +
                 ", totalAmount=" + totalAmount +
                 ", orderStatus='" + orderStatus + '\'' +
                 '}';
     }
+
     public static class Builder {
         private int orderID;
-        private int userID;
-        private int listingID;
-        private Date orderDate;
+        private User userId;
+        private LocalDate orderDate;
         private double totalAmount;
         private String orderStatus;
 
@@ -89,18 +90,12 @@ public class Order {
             return this;
         }
 
-        public Builder setUserID(int userID) {
-            this.userID = userID;
+        public Builder setBuyerId(User userId) {
+            this.userId = userId;
             return this;
         }
 
-        public Builder setListingID(int listingID) {
-            this.listingID = listingID;
-            return this;
-
-        }
-
-        public Builder setOrderDate(Date orderDate) {
+        public Builder setOrderDate(LocalDate orderDate) {
             this.orderDate = orderDate;
             return this;
         }
@@ -117,8 +112,7 @@ public class Order {
 
         public Builder copy(Order o) {
             this.orderID = o.orderID;
-            this.userID = o.userID;
-            this.listingID = o.listingID;
+            this.userId = o.userId;
             this.orderDate = o.orderDate;
             this.totalAmount = o.totalAmount;
             this.orderStatus = o.orderStatus;
@@ -127,7 +121,6 @@ public class Order {
 
 
 
-public Order build(){return new Order(this);
-}
+        public Order build(){return new Order(this);}
     }
 }

@@ -2,9 +2,7 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-
 import java.util.Objects;
 import java.util.Set;
 

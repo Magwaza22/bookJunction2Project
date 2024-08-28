@@ -1,7 +1,6 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
@@ -9,7 +8,7 @@ import java.util.Objects;
 @Entity
 public class Book implements Serializable {
     @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookID;
 
     @Lob

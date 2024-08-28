@@ -1,18 +1,20 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-import java.util.Date;
+import jakarta.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 public class Notification {
     @Id
     private int notificationID;
-    private int userID;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userID; // Buyer
+
     private String message;
-    private Date date;
+    private LocalDate date;
 
 
     public Notification() {
@@ -25,15 +27,11 @@ public class Notification {
 
     }
 
-    public Notification(Date date) {
-        this.date = date;
-    }
-
     public int getNotificationID() {
         return notificationID;
     }
 
-    public int getUserID() {
+    public User getUserID() {
         return userID;
     }
 
@@ -41,20 +39,21 @@ public class Notification {
         return message;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Notification that)) return false;
-        return getNotificationID() == that.getNotificationID() && getUserID() == that.getUserID() && Objects.equals(getMessage(), that.getMessage()) && Objects.equals(getDate(), that.getDate());
+        if (o == null || getClass() != o.getClass()) return false;
+        Notification that = (Notification) o;
+        return notificationID == that.notificationID && Objects.equals(userID, that.userID) && Objects.equals(message, that.message) && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNotificationID(), getUserID(), getMessage(), getDate());
+        return Objects.hash(notificationID, userID, message, date);
     }
 
     @Override
@@ -66,18 +65,19 @@ public class Notification {
                 ", date=" + date +
                 '}';
     }
+
     public static class Builder{
         private int notificationID;
-        private int userID;
+        private User userID;
         private String message;
-        private Date date;
+        private LocalDate date;
 
         public Builder setNotificationID(int notificationID) {
             this.notificationID = notificationID;
             return this;
         }
 
-        public Builder setUserID(int userID) {
+        public Builder setUserID(User userID) {
             this.userID = userID;
             return this;
         }
@@ -87,16 +87,16 @@ public class Notification {
             return this;
         }
 
-        public Builder setDate(Date date) {
+        public Builder setDate(LocalDate date) {
             this.date = date;
             return this;
         }
         public Builder copy(Notification n) {
-          this.notificationID = n.notificationID;
-          this.userID = n.userID;
-          this.message =n.message;
-          this.date= n.date;
-          return this;
+            this.notificationID = n.notificationID;
+            this.userID = n.userID;
+            this.message =n.message;
+            this.date= n.date;
+            return this;
         }
         public Notification build(){return new Notification(this);}
     }
