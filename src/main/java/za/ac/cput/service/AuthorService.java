@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Author;
 import za.ac.cput.repository.AuthorRepository;
 
+import java.util.List;
+
 @Service
 public class AuthorService implements IAuthorService{
     private AuthorRepository authorRepository;
@@ -25,6 +27,11 @@ public class AuthorService implements IAuthorService{
 
     @Override
     public Author update(Author author) {
+        return null;
+    }
+
+    @Override
+    public List<Author> getall() {
         return null;
     }
 }

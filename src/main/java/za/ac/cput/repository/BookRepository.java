@@ -6,5 +6,5 @@ import za.ac.cput.domain.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-    Book findById(String s);
+
 }
