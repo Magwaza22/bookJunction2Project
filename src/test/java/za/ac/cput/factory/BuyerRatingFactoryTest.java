@@ -2,7 +2,7 @@ package za.ac.cput.factory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import za.ac.cput.domain.CustomerRating;
+import za.ac.cput.domain.BuyerRating;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,8 +14,8 @@ class BuyerRatingFactoryTest {
     private int deliveryRating;
     private int accuracyOfRating;
 
-    private CustomerRating user1;
-    private CustomerRating user2;
+    private BuyerRating user1;
+    private BuyerRating user2;
 
     @BeforeEach
     void setup(){
