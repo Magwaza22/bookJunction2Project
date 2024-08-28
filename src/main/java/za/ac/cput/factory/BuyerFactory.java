@@ -1,21 +1,24 @@
+
 package za.ac.cput.factory;
 
 import za.ac.cput.domain.Buyer;
+import za.ac.cput.domain.TransactionHistory;
 import za.ac.cput.util.Helper;
 
+import java.util.Set;
+
 public class BuyerFactory {
-    public static Buyer createBuyer(String name, String email, String phoneNumber) {
-        if (Helper.isNullOrEmpty(name) || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(phoneNumber)) {
-            return null;
+    public static Buyer createBuyer(Set<TransactionHistory> buyingHistory) {
+        if (buyingHistory == null || buyingHistory.isEmpty()) {
+            return null; // or throw an IllegalArgumentException
         }
 
-        String buyerId = String.valueOf(Helper.generateId());
-
         return new Buyer.Builder()
-                .setBuyerId(buyerId)
-                .setName(name)
-                .setEmail(email)
-                .setPhoneNumber(phoneNumber)
+                .setBuyingHistory(buyingHistory)
                 .build();
+    }
+
+    public static Buyer buildBuyer(Set<TransactionHistory> buyingHistory) {
+        throw new UnsupportedOperationException();
     }
 }

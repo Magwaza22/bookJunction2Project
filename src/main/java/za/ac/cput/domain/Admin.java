@@ -1,8 +1,9 @@
 package za.ac.cput.domain;
 
-
 import jakarta.persistence.Entity;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import javax.sql.RowSet;
 import java.util.Objects;
@@ -14,28 +15,14 @@ public class Admin {
   private String email;
   private String password;
   private String phoneNumber;
-  @jakarta.persistence.Id
-  private Long id;
+  protected Admin(){}
 
-  // Default constructor
-  public Admin() {}
-
-  // Parameterized constructor
-  public Admin(Long adminID, String name, String email, String password, String phoneNumber) {
-    this.adminID = adminID;
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.phoneNumber = phoneNumber;
-  }
-
-  // Copy constructor
-  public Admin(Admin other) {
-    this.adminID = other.adminID;
-    this.name = other.name;
-    this.email = other.email;
-    this.password = other.password;
-    this.phoneNumber = other.phoneNumber;
+  public Admin(Builder builder) {
+    this.adminID = builder.adminID;
+    this.name = builder.name;
+    this.email = builder.email;
+    this.password = builder.password;
+    this.phoneNumber = builder.phoneNumber;
   }
 
   // Getters
@@ -59,44 +46,17 @@ public class Admin {
     return phoneNumber;
   }
 
-  // Setters
-  public void setAdminID(Long adminID) {
-    this.adminID = adminID;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
-  // equals method
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Admin)) return false;
+    if (o == null || getClass() != o.getClass()) return false;
     Admin admin = (Admin) o;
-    return Objects.equals(getAdminID(), admin.getAdminID()) &&
-            Objects.equals(getName(), admin.getName()) &&
-            Objects.equals(getEmail(), admin.getEmail()) &&
-            Objects.equals(getPassword(), admin.getPassword()) &&
-            Objects.equals(getPhoneNumber(), admin.getPhoneNumber());
+    return Objects.equals(adminID, admin.adminID) && Objects.equals(name, admin.name) && Objects.equals(email, admin.email) && Objects.equals(password, admin.password) && Objects.equals(phoneNumber, admin.phoneNumber);
   }
 
-  // hashCode method
   @Override
   public int hashCode() {
-    return Objects.hash(getAdminID(), getName(), getEmail(), getPassword(), getPhoneNumber());
+    return Objects.hash(adminID, name, email, password, phoneNumber);
   }
 
   // toString method
@@ -110,17 +70,6 @@ public class Admin {
             '}';
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public Object getAdminId() {
-      return null;
-  }
 
   // Builder pattern implementation
   public static class Builder {
@@ -154,9 +103,16 @@ public class Admin {
       this.phoneNumber = phoneNumber;
       return this;
     }
-
+    public Builder copy(Admin admin){
+      this.adminID = admin.adminID;
+      this.name = admin.name;
+      this.email = admin.email;
+      this.password = admin.password;
+      this.phoneNumber = admin.phoneNumber;
+      return this;
+    }
     public Admin build() {
-      return new Admin(adminID, name, email, password, phoneNumber);
+      return new Admin(this);
     }
 
 

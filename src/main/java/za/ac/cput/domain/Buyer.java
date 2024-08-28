@@ -1,100 +1,60 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
-public class Buyer {
-    @Id
-    private String buyerId;
-    private String name;
-    private String email;
-    private String phoneNumber;
+public class Buyer extends User {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
+    private Set<TransactionHistory> buyingHistory;
 
     protected Buyer() {
     }
 
-    private Buyer(Builder builder) {
-        this.buyerId = builder.buyerId;
-        this.name = builder.name;
-        this.email = builder.email;
-        this.phoneNumber = builder.phoneNumber;
+    public Buyer(Builder builder) {
+        this.buyingHistory = builder.buyingHistory;
     }
 
-    public String getBuyerId() {
-        return buyerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public Set<TransactionHistory> getBuyingHistory() {
+        return buyingHistory;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Buyer)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Buyer buyer = (Buyer) o;
-        return Objects.equals(getBuyerId(), buyer.getBuyerId()) &&
-                Objects.equals(getName(), buyer.getName()) &&
-                Objects.equals(getEmail(), buyer.getEmail()) &&
-                Objects.equals(getPhoneNumber(), buyer.getPhoneNumber());
+        return Objects.equals(buyingHistory, buyer.buyingHistory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBuyerId(), getName(), getEmail(), getPhoneNumber());
+        return Objects.hash(super.hashCode(), buyingHistory);
     }
 
     @Override
     public String toString() {
         return "Buyer{" +
-                "buyerId='" + buyerId + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                "buyingHistory=" + buyingHistory +
                 '}';
     }
 
     public static class Builder {
-        private String buyerId;
-        private String name;
-        private String email;
-        private String phoneNumber;
+        private Set<TransactionHistory> buyingHistory;
 
-        public Builder setBuyerId(String buyerId) {
-            this.buyerId = buyerId;
-            return this;
-        }
-
-        public Builder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder setEmail(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public Builder setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
+        public Builder setBuyingHistory(Set<TransactionHistory> buyingHistory) {
+            this.buyingHistory = buyingHistory;
             return this;
         }
 
         public Builder copy(Buyer buyer) {
-            this.buyerId = buyer.buyerId;
-            this.name = buyer.name;
-            this.email = buyer.email;
-            this.phoneNumber = buyer.phoneNumber;
+            this.buyingHistory = buyer.buyingHistory;
             return this;
         }
 
@@ -102,4 +62,5 @@ public class Buyer {
             return new Buyer(this);
         }
     }
+
 }

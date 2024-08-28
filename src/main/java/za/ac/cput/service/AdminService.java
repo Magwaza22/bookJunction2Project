@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class AdminService implements IAdminService {
-    private AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
 
     @Autowired
     public AdminService(AdminRepository adminRepository) {
@@ -22,8 +22,8 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public Admin read(String id) {
-        return adminRepository.findById(id).orElse(null);
+    public Admin read(Long adminID) {
+        return (Admin) adminRepository.findById(adminID).orElse(null);
     }
 
     @Override
@@ -32,12 +32,12 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public void delete(String adminId) {
-        adminRepository.deleteById(adminId);
+    public List<Admin> getAll() {
+        return adminRepository.findAll();
     }
 
     @Override
-    public List<Admin> getAll() {
-        return adminRepository.findAll();
+    public void delete(Long adminID) {
+        adminRepository.deleteById(String.valueOf(adminID));
     }
 }
