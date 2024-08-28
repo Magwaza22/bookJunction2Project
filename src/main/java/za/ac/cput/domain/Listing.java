@@ -1,22 +1,31 @@
-package za.ac.cput.domain;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
-
+@Entity
 public class Listing {
+    @Id
     private int listingID;
-    private Long bookID;
-    private String userID;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user; // Seller
+
     private LocalDate dateListed;
     private double price;
     private String status;
+    @Column(name = "item_condition")
     private String condition;
     public Listing(){
     }
     private Listing(Builder builder){
         this.listingID = builder.listingID;
-        this.bookID = builder.bookID;
-        this.userID = builder.userID;
+        this.book = builder.bookID;
+        this.user = builder.user;
         this.dateListed = builder.dateListed;
         this.price = builder.price;
         this.status = builder.status;
@@ -27,14 +36,6 @@ public class Listing {
         return listingID;
     }
 
-    public Long getBookID() {
-        return bookID;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
     public LocalDate getDateListed() {
         return dateListed;
     }
@@ -42,6 +43,10 @@ public class Listing {
     public double getPrice() {
         return price;
     }
+
+    public Book getBook() { return book;}
+
+    public User getUser() {return user;}
 
     public String getStatus() {
         return status;
@@ -54,31 +59,34 @@ public class Listing {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Listing listing)) return false;
-        return Double.compare(getPrice(), listing.getPrice()) == 0 && Objects.equals(getListingID(), listing.getListingID()) && Objects.equals(getBookID(), listing.getBookID()) && Objects.equals(getUserID(), listing.getUserID()) && Objects.equals(getDateListed(), listing.getDateListed()) && Objects.equals(getStatus(), listing.getStatus()) && Objects.equals(getCondition(), listing.getCondition());
+        if (o == null || getClass() != o.getClass()) return false;
+        Listing listing = (Listing) o;
+        return listingID == listing.listingID && Double.compare(price, listing.price) == 0 && Objects.equals(book, listing.book) && Objects.equals(user, listing.user) && Objects.equals(dateListed, listing.dateListed) && Objects.equals(status, listing.status) && Objects.equals(condition, listing.condition);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getListingID(), getBookID(), getUserID(), getDateListed(), getPrice(), getStatus(), getCondition());
+        return Objects.hash(listingID, book, user, dateListed, price, status, condition);
     }
 
     @Override
     public String toString() {
         return "Listing{" +
-                "listingID='" + listingID + '\'' +
-                ", bookID=" + bookID +
-                ", userID='" + userID + '\'' +
+                "listingID=" + listingID +
+                ", book=" + book +
+                ", user=" + user +
                 ", dateListed=" + dateListed +
                 ", price=" + price +
                 ", status='" + status + '\'' +
                 ", condition='" + condition + '\'' +
                 '}';
     }
+
     public static class Builder {
         private int listingID;
-        private Long bookID;
-        private String userID;
+        private Book bookID;
+        private User user; // Seller
+
         private LocalDate dateListed;
         private double price;
         private String status;
@@ -89,13 +97,13 @@ public class Listing {
             return this;
         }
 
-        public Builder setBookID(Long bookID) {
+        public Builder setBookID(Book bookID) {
             this.bookID = bookID;
             return this;
         }
 
-        public Builder setUserID(String userID) {
-            this.userID = userID;
+        public Builder setUserID(User user) {
+            this.user = user;
             return this;
         }
 
@@ -120,11 +128,11 @@ public class Listing {
         }
         public Listing.Builder copy(Listing l) {
             this.listingID = l.listingID;
-            this.bookID = l.bookID;
-            this.userID = l.userID;
+            this.bookID = l.book;
+            this.user = l.user;
             this.dateListed = l.dateListed;
             this.status = l.status;
-            this.condition = condition;
+            this.condition = l.condition;
             return this ;
         }
         public Listing build() {

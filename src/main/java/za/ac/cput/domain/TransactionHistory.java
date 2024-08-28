@@ -1,14 +1,23 @@
-package za.ac.cput.domain;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
-
+@Entity
 public class TransactionHistory {
+    @Id
+    private Book book;
     private int transaction_id;
-    private int book_id;
-    private int user_id_seller;
-    private int user_id_buyer;
-    private double price;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book_id;
+
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
     private LocalDate date;
 
     public TransactionHistory(){
@@ -17,9 +26,8 @@ public class TransactionHistory {
     private TransactionHistory(Builder builder){
         this.transaction_id = builder.transaction_id;
         this.book_id = builder.book_id;
-        this.user_id_seller = builder.user_id_seller;
-        this.user_id_buyer = builder.user_id_buyer;
-        this.price = builder.price;
+        this.buyer = builder.buyer;
+        this.seller = builder.seller;
         this.date = builder.date;
     }
 
@@ -27,20 +35,16 @@ public class TransactionHistory {
         return transaction_id;
     }
 
-    public int getBook_id() {
+    public Book getBook_id() {
         return book_id;
     }
 
-    public int getUser_id_seller() {
-        return user_id_seller;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public int getUser_id_buyer() {
-        return user_id_buyer;
-    }
-
-    public double getPrice() {
-        return price;
+    public Seller getSeller() {
+        return seller;
     }
 
     public LocalDate getDate() {
@@ -50,32 +54,33 @@ public class TransactionHistory {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TransactionHistory that)) return false;
-        return getTransaction_id() == that.getTransaction_id() && getBook_id() == that.getBook_id() && getUser_id_seller() == that.getUser_id_seller() && getUser_id_buyer() == that.getUser_id_buyer() && Double.compare(getPrice(), that.getPrice()) == 0 && Objects.equals(getDate(), that.getDate());
+        if (o == null || getClass() != o.getClass()) return false;
+        TransactionHistory that = (TransactionHistory) o;
+        return transaction_id == that.transaction_id && Objects.equals(book, that.book) && Objects.equals(book_id, that.book_id) && Objects.equals(buyer, that.buyer) && Objects.equals(seller, that.seller) && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTransaction_id(), getBook_id(), getUser_id_seller(), getUser_id_buyer(), getPrice(), getDate());
+        return Objects.hash(book, transaction_id, book_id, buyer, seller, date);
     }
 
     @Override
     public String toString() {
         return "TransactionHistory{" +
-                "transaction_id=" + transaction_id +
+                "book=" + book +
+                ", transaction_id=" + transaction_id +
                 ", book_id=" + book_id +
-                ", user_id_seller=" + user_id_seller +
-                ", user_id_buyer=" + user_id_buyer +
-                ", price=" + price +
+                ", buyer=" + buyer +
+                ", seller=" + seller +
                 ", date=" + date +
                 '}';
     }
+
     public static class Builder {
         private int transaction_id;
-        private int book_id;
-        private int user_id_seller;
-        private int user_id_buyer;
-        private double price;
+        private Book book_id;
+        private Buyer buyer;
+        private Seller seller;
         private LocalDate date;
 
         public Builder setTransaction_id(int transaction_id) {
@@ -83,23 +88,18 @@ public class TransactionHistory {
             return this;
         }
 
-        public Builder setBook_id(int book_id) {
+        public Builder setBook_id(Book book_id) {
             this.book_id = book_id;
             return this;
         }
 
-        public Builder  setUser_id_seller(int user_id_seller) {
-            this.user_id_seller = user_id_seller;
+        public Builder setBuyer(Buyer buyer) {
+            this.buyer = buyer;
             return this;
         }
 
-        public Builder  setUser_id_buyer(int user_id_buyer) {
-            this.user_id_buyer = user_id_buyer;
-            return this;
-        }
-
-        public Builder setPrice(double price) {
-            this.price = price;
+        public Builder setSeller(Seller seller) {
+            this.seller = seller;
             return this;
         }
 
@@ -110,9 +110,8 @@ public class TransactionHistory {
         public Builder copy(TransactionHistory t){
             this.transaction_id = t.transaction_id;
             this.book_id = t.book_id;
-            this.user_id_seller = t.user_id_seller;
-            this.user_id_buyer = t.user_id_buyer;
-            this.price = t.price;
+            this.buyer = t.buyer;
+            this.seller = t.seller;
             this.date = t.date;
             return this;
         }
