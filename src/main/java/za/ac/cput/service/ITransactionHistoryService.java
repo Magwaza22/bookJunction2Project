@@ -1,4 +1,6 @@
 package za.ac.cput.service;
 
-public interface ITransactionHistoryService {
+import za.ac.cput.domain.TransactionHistory;
+
+public interface ITransactionHistoryService extends IService<TransactionHistory, String> {
 }
