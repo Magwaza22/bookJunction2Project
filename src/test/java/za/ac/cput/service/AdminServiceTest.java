@@ -50,7 +50,7 @@ class AdminServiceTest {
 
     @Test
     void testRead() {
-        when(adminRepository.findById(1L)).thenReturn(Optional.of(admin));
+        when(adminRepository.findById(String.valueOf(1L))).thenReturn(Optional.of(admin));
 
         Admin foundAdmin = adminService.read(1L);
         assertNotNull(foundAdmin);
@@ -59,7 +59,7 @@ class AdminServiceTest {
 
     @Test
     void testRead_AdminNotFound() {
-        when(adminRepository.findById(2L)).thenReturn(Optional.empty());
+        when(adminRepository.findById(String.valueOf(2L))).thenReturn(Optional.empty());
 
         Admin foundAdmin = adminService.read(2L);
         assertNull(foundAdmin);
