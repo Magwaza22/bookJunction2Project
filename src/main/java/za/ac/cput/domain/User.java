@@ -14,7 +14,7 @@ public class User implements Serializable {
     private String email;
     private String phoneNumber;
 
-    protected User() {
+    public User() {
     }
 
     private User(Builder builder) {

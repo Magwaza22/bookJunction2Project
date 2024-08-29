@@ -14,7 +14,7 @@ class TransactionHistoryFactoryTest {
 
     @Test
     void createTransactionHistory() {
-        Book book = new Book(); // Assume Book has a default constructor
+        za.ac.cput.domain.Book book = new za.ac.cput.domain.Book(); // Assume Book has a default constructor
         Buyer buyer = new Buyer(); // Assume Buyer has a default constructor
         Seller seller = new Seller(); // Assume Seller has a default constructor
         LocalDate date = LocalDate.now();

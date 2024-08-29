@@ -11,7 +11,7 @@ public class Buyer extends User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
     private Set<TransactionHistory> buyingHistory;
 
-    protected Buyer() {
+    public Buyer() {
     }
 
     public Buyer(Builder builder) {
