@@ -13,7 +13,7 @@ public class Seller extends User{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
     private Set<TransactionHistory> inventory;
 
-    protected Seller() {
+    public Seller() {
     }
 
     public Seller(Builder builder) {
@@ -43,6 +43,12 @@ public class Seller extends User{
         return "Seller{" +
                 "inventory=" + inventory +
                 '}';
+    }
+
+    public void setId(Long aLong) {
+    }
+
+    public void setInventory(Set<TransactionHistory> inventory) {
     }
 
     public static class Builder{
