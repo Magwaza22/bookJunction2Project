@@ -10,7 +10,7 @@ import za.ac.cput.service.AdminService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admins")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;

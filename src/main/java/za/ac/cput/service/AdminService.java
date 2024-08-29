@@ -23,7 +23,7 @@ public class AdminService implements IAdminService {
 
     @Override
     public Admin read(Long adminID) {
-        return (Admin) adminRepository.findById(adminID).orElse(null);
+        return adminRepository.findById(String.valueOf(adminID)).orElse(null);
     }
 
     @Override

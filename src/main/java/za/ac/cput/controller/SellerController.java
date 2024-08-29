@@ -1,21 +1,21 @@
 package za.ac.cput.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.ac.cput.domain.Seller;
-import za.ac.cput.service.ISellerService;
+//import za.ac.cput.domain.Seller;
+//import za.ac.cput.service.ISellerService;
 
-import java.util.List;
+//import java.util.List;
 
 @RestController
-@RequestMapping("/sellers")
+@RequestMapping("/seller")
 public class SellerController {
-
-    private final ISellerService sellerService;
+/*
+    private final SellerService sellerService;
 
     @Autowired
-    public SellerController(ISellerService sellerService) {
+    public SellerController(SellerService sellerService) {
         this.sellerService = sellerService;
     }
 
@@ -48,5 +48,5 @@ public class SellerController {
     public ResponseEntity<Void> deleteSeller(@PathVariable Long id) {
         sellerService.delete(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }

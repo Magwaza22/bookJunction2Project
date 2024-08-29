@@ -10,7 +10,7 @@ import za.ac.cput.service.BuyerService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/buyers")
+@RequestMapping("/buyer")
 public class BuyerController {
 
     private final BuyerService buyerService;

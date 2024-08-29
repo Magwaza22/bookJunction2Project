@@ -3,6 +3,7 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 import za.ac.cput.domain.Book;
 import za.ac.cput.factory.BookFactory;
 
@@ -44,7 +45,6 @@ class BookServiceTest {
 
     @Test
     void read() {
-        //Book savedBook = bookService.save(book1);
 
         Book foundBook = bookService.read(book1.getBookID());
         assertNotNull(foundBook);
