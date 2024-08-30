@@ -38,10 +38,10 @@ public class RatingController {
         return ResponseEntity.ok(updatedRating);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Rating>> getAllRatings() {
-        List<Rating> ratings = ratingService.getAll();
-        return ResponseEntity.ok(ratings);
-    }
+   // @GetMapping
+   // public ResponseEntity<List<Rating>> getAllRatings() {
+     //   List<Rating> ratings = ratingService.getAll();
+    //    return ResponseEntity.ok(ratings);
+  //  }
 
 }
