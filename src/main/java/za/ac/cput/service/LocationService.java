@@ -58,5 +58,15 @@ public class LocationService implements ILocationService {
         repository.deleteById(id);
     }
 
-}
+    public Location saveLocation(Location location) {
+        return location;
+    }
+
+    public Location getLocationById(Long locationId) {
+
+        return null;
+    }
+        public void deleteLocation (Long locationId){
+        }
+    }
 
