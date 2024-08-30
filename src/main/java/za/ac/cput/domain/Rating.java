@@ -2,9 +2,10 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import java.time.LocalDate;
 import java.util.Date;
-
 import java.util.Objects;
+
 @Entity
 public class Rating {
     @Id
@@ -15,12 +16,13 @@ public class Rating {
     private int valueRating;
     private int deliveryRating;
     private int accuracyOfRating;
-    private Date date;
+    private LocalDate date;
     private User user;
 
     public Rating(){}
 
     private Rating(Builder builder){
+
         id = builder.id;
         overAllRating = builder.overAllRating;
         bookConditionRating = builder.bookConditionRating;
@@ -28,7 +30,7 @@ public class Rating {
         valueRating = builder.valueRating;
         deliveryRating = builder.deliveryRating;
         accuracyOfRating = builder.accuracyOfRating;
-        date = builder.date;
+        date = this.date;
 
     }
 
@@ -58,19 +60,19 @@ public class Rating {
         return accuracyOfRating;
     }
 
-    public Date getDate() {return date;}
+    public LocalDate getDate() {return date;}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rating rating = (Rating) o;
-        return overAllRating == rating.overAllRating && bookConditionRating == rating.bookConditionRating && sellerReliabilityRating == rating.sellerReliabilityRating && valueRating == rating.valueRating && deliveryRating == rating.deliveryRating && accuracyOfRating == rating.accuracyOfRating && Objects.equals(id, rating.id) && Objects.equals(date, rating.date);
+        return overAllRating == rating.overAllRating && bookConditionRating == rating.bookConditionRating && sellerReliabilityRating == rating.sellerReliabilityRating && valueRating == rating.valueRating && deliveryRating == rating.deliveryRating && accuracyOfRating == rating.accuracyOfRating && Objects.equals(id, rating.id) && Objects.equals(date, rating.date) && Objects.equals(user, rating.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, overAllRating, bookConditionRating, sellerReliabilityRating, valueRating, deliveryRating, accuracyOfRating, date);
+        return Objects.hash(id, overAllRating, bookConditionRating, sellerReliabilityRating, valueRating, deliveryRating, accuracyOfRating, date, user);
     }
 
     @Override
@@ -84,6 +86,7 @@ public class Rating {
                 ", deliveryRating=" + deliveryRating +
                 ", accuracyOfRating=" + accuracyOfRating +
                 ", date=" + date +
+                ", user=" + user +
                 '}';
     }
 
@@ -95,7 +98,8 @@ public class Rating {
         private int valueRating;
         private int deliveryRating;
         private int accuracyOfRating;
-        private Date date;
+        private LocalDate date;
+        private User user;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -132,8 +136,26 @@ public class Rating {
             return this;
         }
 
-        public Builder setDate(Date date) {
+        public Builder setDate(LocalDate date) {
             this.date = date;
+            return this;
+        }
+
+        public Builder setUser(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public Rating.Builder copy(Rating r) {
+            this.id = r.id;
+            this.overAllRating = r.overAllRating;
+            this.bookConditionRating = r.bookConditionRating;
+            this.valueRating = r.valueRating;
+            this.deliveryRating = r.deliveryRating;
+            this.accuracyOfRating = r.accuracyOfRating;
+            this.sellerReliabilityRating = r.sellerReliabilityRating;
+            this.date = r.date;
+            this.user = r.user;
             return this;
         }
 

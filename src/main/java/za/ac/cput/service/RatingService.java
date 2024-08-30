@@ -40,7 +40,7 @@ public class RatingService implements IRatingService{
     }
 
     @Override
-    public List getAll(Rating id) {
+    public List<Rating> getAll(Rating id) {
         return rrepo.findAll();
     }
 }
