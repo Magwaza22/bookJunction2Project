@@ -54,9 +54,12 @@ public class AppointmentService implements IAppointmentService {
     }
 
 
-
     @Override
     public List<Appointment> getall() {
         return repository.findAll();
+    }
+
+    public List<Appointment> getAll() {
+        return null;
     }
 }
