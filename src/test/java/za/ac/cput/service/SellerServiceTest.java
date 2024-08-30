@@ -3,14 +3,17 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import za.ac.cput.domain.Seller;
+import za.ac.cput.domain.TransactionHistory;
 import za.ac.cput.repository.SellerRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -22,7 +25,6 @@ class SellerServiceTest {
     @InjectMocks
     private SellerService sellerService;
 
-    @Mock
     private SellerRepository sellerRepository;
 
     @BeforeEach
@@ -45,7 +47,6 @@ class SellerServiceTest {
         when(sellerRepository.findById(String.valueOf(anyLong()))).thenReturn(Optional.of(seller));
 
         Seller foundSeller = sellerService.read(1L);
-        //assertNotNull(foundSeller);
     }
 
     @Test
@@ -73,6 +74,7 @@ class SellerServiceTest {
         verify(sellerRepository, times(1)).deleteById(String.valueOf(1L));
     }
 
+
     @Test
     void testGetAllSellers() {
         List<Seller> sellers = new ArrayList<>();
@@ -83,3 +85,5 @@ class SellerServiceTest {
     }
 
 }
+
+

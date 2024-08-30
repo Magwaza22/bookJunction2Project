@@ -24,11 +24,11 @@ public class User implements Serializable {
         this.phoneNumber = builder.phoneNumber;
     }
 
-    public String getUserId() {
-        return userId;
+    public Long getUserId() {
+        return Long.valueOf(userId);
     }
 
-    public String getName() {
+    public String getName(String janeDoe) {
         return name;
     }
 
@@ -46,14 +46,14 @@ public class User implements Serializable {
         if (!(o instanceof User)) return false;
         User user = (User) o;
         return Objects.equals(getUserId(), user.getUserId()) &&
-                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getName("Jane Doe"), user.getName("Jane Doe")) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
                 Objects.equals(getPhoneNumber(), user.getPhoneNumber());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getName(), getEmail(), getPhoneNumber());
+        return Objects.hash(getUserId(), getName("Jane Doe"), getEmail(), getPhoneNumber());
     }
 
     @Override

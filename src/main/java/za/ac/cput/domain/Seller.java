@@ -51,6 +51,10 @@ public class Seller extends User{
     public void setInventory(Set<TransactionHistory> inventory) {
     }
 
+    public String getName() {
+        return null;
+    }
+
     public static class Builder{
         private Set<TransactionHistory> inventory;
 

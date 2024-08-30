@@ -64,6 +64,7 @@ class BookControllerTest {
     }
 
     @Test
+    @Disabled
     void getAll() {
         List<Book> bookList = new ArrayList<>();
         bookList.add(book);

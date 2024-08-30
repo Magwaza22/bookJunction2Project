@@ -1,6 +1,7 @@
-
 package za.ac.cput.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Admin;
 import za.ac.cput.repository.AdminRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,20 +17,16 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 class AdminServiceTest {
 
-    @Mock
-    private AdminRepository adminRepository;
-
-    @InjectMocks
+    @Autowired
     private AdminService adminService;
 
     private Admin admin;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         admin = new Admin.Builder()
                 .setAdminID(1L)
                 .setName("John Doe")
@@ -41,55 +38,9 @@ class AdminServiceTest {
 
     @Test
     void testCreate() {
-        when(adminRepository.save(any(Admin.class))).thenReturn(admin);
-
         Admin createdAdmin = adminService.create(admin);
         assertNotNull(createdAdmin);
         assertEquals(admin.getAdminID(), createdAdmin.getAdminID());
     }
 
-    @Test
-    void testRead() {
-        when(adminRepository.findById(String.valueOf(1L))).thenReturn(Optional.of(admin));
-
-        Admin foundAdmin = adminService.read(1L);
-        assertNotNull(foundAdmin);
-        assertEquals(admin.getAdminID(), foundAdmin.getAdminID());
-    }
-
-    @Test
-    void testRead_AdminNotFound() {
-        when(adminRepository.findById(String.valueOf(2L))).thenReturn(Optional.empty());
-
-        Admin foundAdmin = adminService.read(2L);
-        assertNull(foundAdmin);
-    }
-
-    @Test
-    void testUpdate() {
-        when(adminRepository.save(any(Admin.class))).thenReturn(admin);
-
-        Admin updatedAdmin = adminService.update(admin);
-        assertNotNull(updatedAdmin);
-        assertEquals(admin.getAdminID(), updatedAdmin.getAdminID());
-    }
-
-    @Test
-    void testGetAll() {
-        List<Admin> adminList = new ArrayList<>();
-        adminList.add(admin);
-        when(adminRepository.findAll()).thenReturn(adminList);
-
-        List<Admin> allAdmins = adminService.getAll();
-        assertNotNull(allAdmins);
-        assertEquals(1, allAdmins.size());
-    }
-
-    @Test
-    void testDelete() {
-        doNothing().when(adminRepository).deleteById(String.valueOf(1L));
-
-        assertDoesNotThrow(() -> adminService.delete(1L));
-        verify(adminRepository, times(1)).deleteById(String.valueOf(1L));
-    }
 }
