@@ -37,12 +37,12 @@ public class SellerController {
         return ResponseEntity.ok(sellers);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Seller> updateSeller(@PathVariable Long id, @RequestBody Seller seller) {
-        seller.setId(id); // Set the ID for the update
-        Seller updatedSeller = sellerService.update(seller);
-        return ResponseEntity.ok(updatedSeller);
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Seller> updateSeller(@PathVariable Long id, @RequestBody Seller seller) {
+//        seller.setId(id); // Set the ID for the update
+//        Seller updatedSeller = sellerService.update(seller);
+//        return ResponseEntity.ok(updatedSeller);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSeller(@PathVariable Long id) {

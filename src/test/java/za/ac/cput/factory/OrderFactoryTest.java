@@ -15,7 +15,7 @@ public class OrderFactoryTest {
 
     @Test
     public void testCreateOrderSuccess() {
-        User user = new User.Builder().setUserId("12345").build();
+        User user = new User.UserBuilder().setUserId("12345").build();
         LocalDate orderDate = LocalDate.now();
         Order order = OrderFactory.createOrder(1, user, orderDate, 100.0, "Pending");
 
@@ -29,7 +29,7 @@ public class OrderFactoryTest {
 
     @Test
     public void testCreateOrderNullOrderID() {
-        User user = new User.Builder().setUserId("12345").build();
+        User user = new User.UserBuilder().setUserId("12345").build();
         LocalDate orderDate = LocalDate.now();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -58,7 +58,7 @@ public class OrderFactoryTest {
 
     @Test
     public void testCreateOrderNullOrderDate() {
-        User user = new User.Builder().setUserId("12345").build();
+        User user = new User.UserBuilder().setUserId("12345").build();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             OrderFactory.createOrder(1, user, null, 100.0, "Pending");
@@ -72,7 +72,7 @@ public class OrderFactoryTest {
 
     @Test
     public void testCreateOrderNullTotalAmount() {
-        User user = new User.Builder().setUserId("12345").build();
+        User user = new User.UserBuilder().setUserId("12345").build();
         LocalDate orderDate = LocalDate.now();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -87,7 +87,7 @@ public class OrderFactoryTest {
 
     @Test
     public void testCreateOrderNullOrderStatus() {
-        User user = new User.Builder().setUserId("12345").build();
+        User user = new User.UserBuilder().setUserId("12345").build();
         LocalDate orderDate = LocalDate.now();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {

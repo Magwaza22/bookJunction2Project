@@ -11,7 +11,7 @@ public class UserFactory {
             return null; // or throw an IllegalArgumentException
         }
 
-        return new User.Builder()
+        return new User.UserBuilder()
                 .setUserId(userId)
                 .setName(name)
                 .setEmail(email)

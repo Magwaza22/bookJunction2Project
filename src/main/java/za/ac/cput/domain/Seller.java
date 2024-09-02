@@ -2,6 +2,7 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 import java.util.Objects;
@@ -10,13 +11,14 @@ import java.util.Set;
 
 @Entity
 public class Seller extends User{
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller", fetch = FetchType.EAGER)
     private Set<TransactionHistory> inventory;
 
     public Seller() {
     }
 
     public Seller(Builder builder) {
+        super(builder);
         this.inventory = builder.inventory;
     }
 
@@ -45,13 +47,7 @@ public class Seller extends User{
                 '}';
     }
 
-    public void setId(Long aLong) {
-    }
-
-    public void setInventory(Set<TransactionHistory> inventory) {
-    }
-
-    public static class Builder{
+    public static class Builder extends UserBuilder{
         private Set<TransactionHistory> inventory;
 
         public Builder setInventory(Set<TransactionHistory> inventory) {
@@ -59,8 +55,11 @@ public class Seller extends User{
             return this;
         }
 
-        public Builder copy(Seller seller){
-            this.inventory = seller.inventory;
+        public Builder copy(User user){
+            if(user instanceof Seller){
+                super.copy(user);
+                this.inventory = ((Seller) user).inventory;
+            }
             return this;
         }
 

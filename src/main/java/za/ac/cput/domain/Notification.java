@@ -11,7 +11,7 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userID; // Buyer
+    private User userID; // Buyer and Seller
 
     private String message;
     private LocalDate date;

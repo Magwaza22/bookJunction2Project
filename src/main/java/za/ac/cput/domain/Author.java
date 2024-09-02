@@ -52,21 +52,21 @@ public class Author implements Serializable {
         return Objects.equals(getFirstName(), author.getFirstName()) && Objects.equals(getLastName(), author.getLastName()) && Objects.equals(getEmail(), author.getEmail()) && Objects.equals(getPhoneNumber(), author.getPhoneNumber()) && Objects.equals(getNationality(), author.getNationality());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName(), getEmail(), getPhoneNumber(), getNationality());
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(getFirstName(), getLastName(), getEmail(), getPhoneNumber(), getNationality());
+//    }
 
-    @Override
-    public String toString() {
-        return "Author{" +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", nationality='" + nationality + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Author{" +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", email='" + email + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", nationality='" + nationality + '\'' +
+//                '}';
+//    }
 
     public static class Builder {
         private String firstName;

@@ -17,7 +17,7 @@ public class User implements Serializable {
     protected User() {
     }
 
-    private User(Builder builder) {
+    protected User(UserBuilder builder) {
         this.userId = builder.userId;
         this.name = builder.name;
         this.email = builder.email;
@@ -43,12 +43,8 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(getUserId(), user.getUserId()) &&
-                Objects.equals(getName(), user.getName()) &&
-                Objects.equals(getEmail(), user.getEmail()) &&
-                Objects.equals(getPhoneNumber(), user.getPhoneNumber());
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(getUserId(), user.getUserId()) && Objects.equals(getName(), user.getName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPhoneNumber(), user.getPhoneNumber());
     }
 
     @Override
@@ -66,33 +62,33 @@ public class User implements Serializable {
                 '}';
     }
 
-    public static class Builder {
-        private String userId;
-        private String name;
-        private String email;
-        private String phoneNumber;
+    public static class UserBuilder {
+        protected String userId;
+        protected String name;
+        protected String email;
+        protected String phoneNumber;
 
-        public Builder setUserId(String userId) {
+        public UserBuilder setUserId(String userId) {
             this.userId = userId;
             return this;
         }
 
-        public Builder setName(String name) {
+        public UserBuilder setName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder setEmail(String email) {
+        public UserBuilder setEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public Builder setPhoneNumber(String phoneNumber) {
+        public UserBuilder setPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
 
-        public Builder copy(User user) {
+        public UserBuilder copy(User user) {
             this.userId = user.userId;
             this.name = user.name;
             this.email = user.email;

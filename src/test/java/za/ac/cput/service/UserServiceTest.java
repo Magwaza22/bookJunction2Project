@@ -29,7 +29,7 @@ class UserServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        user = new User.Builder()
+        user = new User.UserBuilder()
                 .setUserId("user123")
                 .setName("John Doe")
                 .setEmail("john@example.com")

@@ -2,19 +2,21 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class Buyer extends User {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer", fetch = FetchType.EAGER)
     private Set<TransactionHistory> buyingHistory;
 
     protected Buyer() {
     }
 
     public Buyer(Builder builder) {
+        super(builder);
         this.buyingHistory = builder.buyingHistory;
     }
 
@@ -25,15 +27,14 @@ public class Buyer extends User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Buyer buyer)) return false;
         if (!super.equals(o)) return false;
-        Buyer buyer = (Buyer) o;
-        return Objects.equals(buyingHistory, buyer.buyingHistory);
+        return Objects.equals(getBuyingHistory(), buyer.getBuyingHistory());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), buyingHistory);
+        return Objects.hash(super.hashCode(), getBuyingHistory());
     }
 
     @Override
@@ -43,7 +44,7 @@ public class Buyer extends User {
                 '}';
     }
 
-    public static class Builder {
+    public static class Builder extends UserBuilder {
         private Set<TransactionHistory> buyingHistory;
 
         public Builder setBuyingHistory(Set<TransactionHistory> buyingHistory) {
@@ -51,11 +52,13 @@ public class Buyer extends User {
             return this;
         }
 
-        public Builder copy(Buyer buyer) {
-            this.buyingHistory = buyer.buyingHistory;
+        public Builder copy(User user) {
+            if (user instanceof Buyer) {
+                super.copy(user);
+                this.buyingHistory = ((Buyer) user).buyingHistory;
+            }
             return this;
         }
-
         public Buyer build() {
             return new Buyer(this);
         }
