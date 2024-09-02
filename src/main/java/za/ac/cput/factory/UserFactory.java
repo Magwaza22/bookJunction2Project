@@ -1,5 +1,5 @@
-package za.ac.cput.factory;
-
+package za.ac.cput.factory
+        ;
 import za.ac.cput.domain.User;
 import za.ac.cput.util.Helper;
 
@@ -11,7 +11,7 @@ public class UserFactory {
             return null; // or throw an IllegalArgumentException
         }
 
-        return new User.Builder()
+        return new User.UserBuilder()
                 .setUserId(userId)
                 .setName(name)
                 .setEmail(email)

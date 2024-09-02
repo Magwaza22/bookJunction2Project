@@ -12,7 +12,7 @@ class AppointmentFactoryTest {
     @Test
     void testCreateAppointmentWithValidData() {
         // Given valid data
-        User user = new User.Builder()
+        User user = new User.UserBuilder()
                 .setUserId("user123")
                 .setName("Jane Doe")
                 .setEmail("jane.doe@example.com")
@@ -42,7 +42,7 @@ class AppointmentFactoryTest {
     @Test
     void testCreateAppointmentWithNullAppointmentId() {
         // Given a null appointmentId
-        User user = new User.Builder()
+        User user = new User.UserBuilder()
                 .setUserId("user123")
                 .setName("Jane Doe")
                 .setEmail("jane.doe@example.com")
@@ -79,7 +79,7 @@ class AppointmentFactoryTest {
     @Test
     void testCreateAppointmentWithNullDescription() {
         // Given a null description
-        User user = new User.Builder()
+        User user = new User.UserBuilder()
                 .setUserId("user123")
                 .setName("Jane Doe")
                 .setEmail("jane.doe@example.com")
@@ -100,7 +100,7 @@ class AppointmentFactoryTest {
     @Test
     void testCreateAppointmentWithNullDateTime() {
         // Given a null dateTime
-        User user = new User.Builder()
+        User user = new User.UserBuilder()
                 .setUserId("user123")
                 .setName("Jane Doe")
                 .setEmail("jane.doe@example.com")
@@ -120,7 +120,7 @@ class AppointmentFactoryTest {
     @Test
     void testCreateAppointmentWithNullLocation() {
         // Given a null location
-        User user = new User.Builder()
+        User user = new User.UserBuilder()
                 .setUserId("user123")
                 .setName("Jane Doe")
                 .setEmail("jane.doe@example.com")

@@ -6,10 +6,9 @@ import java.util.Objects;
 @Entity
 public class TransactionHistory {
     @Id
-    private Book book;
     private int transaction_id;
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "bookid")
     private Book book_id;
 
     @ManyToOne
@@ -37,8 +36,7 @@ public class TransactionHistory {
     }
 
     public Book getBook_id() {
-        return book_id;
-    }
+       return book_id; }
 
     public Buyer getBuyer() {
         return buyer;
@@ -55,27 +53,25 @@ public class TransactionHistory {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TransactionHistory that = (TransactionHistory) o;
-        return transaction_id == that.transaction_id && Objects.equals(book, that.book) && Objects.equals(book_id, that.book_id) && Objects.equals(buyer, that.buyer) && Objects.equals(seller, that.seller) && Objects.equals(date, that.date);
+        if (!(o instanceof TransactionHistory that)) return false;
+        return getTransaction_id() == that.getTransaction_id() && Objects.equals(book_id, that.book_id) && Objects.equals(getBuyer(), that.getBuyer()) && Objects.equals(getSeller(), that.getSeller()) && Objects.equals(getDate(), that.getDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(book, transaction_id, book_id, buyer, seller, date);
+        return Objects.hash(getTransaction_id(), getDate());
     }
 
-    @Override
-    public String toString() {
-        return "TransactionHistory{" +
-                "book=" + book +
-                ", transaction_id=" + transaction_id +
-                ", book_id=" + book_id +
-                ", buyer=" + buyer +
-                ", seller=" + seller +
-                ", date=" + date +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "TransactionHistory{" +
+//                ", transaction_id=" + transaction_id +
+//                ", book_id=" + book_id +
+//                ", buyer=" + buyer +
+//                ", seller=" + seller +
+//                ", date=" + date +
+//                '}';
+//    }
 
     public static class Builder {
         private int transaction_id;

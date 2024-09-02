@@ -13,7 +13,7 @@ class UserFactoryTest {
 
         assertNotNull(user);
         assertEquals("user123", user.getUserId());
-        assertEquals("John Doe", user.getName("Jane Doe"));
+        assertEquals("John Doe", user.getName());
         assertEquals("john@example.com", user.getEmail());
         assertEquals("1234567890", user.getPhoneNumber());
     }

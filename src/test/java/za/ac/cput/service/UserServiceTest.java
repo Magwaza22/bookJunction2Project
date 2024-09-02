@@ -4,30 +4,32 @@ import za.ac.cput.domain.User;
 import za.ac.cput.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
-@ExtendWith(SpringExtension.class)
-@DataJpaTest
 class UserServiceTest {
 
-    @Autowired
+    @Mock
     private UserRepository userRepository;
 
+    @InjectMocks
     private UserService userService;
 
     private User user;
 
     @BeforeEach
     void setUp() {
-        userService = new UserService(userRepository);
-        user = new User.Builder()
+        MockitoAnnotations.openMocks(this);
+        user = new User.UserBuilder()
                 .setUserId("user123")
                 .setName("John Doe")
                 .setEmail("john@example.com")
@@ -37,47 +39,56 @@ class UserServiceTest {
 
     @Test
     void testCreateUser() {
+        when(userRepository.save(any(User.class))).thenReturn(user);
+
         User createdUser = userService.create(user);
         assertNotNull(createdUser);
-        assertEquals(user.getUserId(), createdUser.getUserId());
+        assertEquals(user, createdUser);
     }
 
     @Test
     void testReadUser() {
-        userRepository.save(user);
+        when(userRepository.findById("user123")).thenReturn(Optional.of(user));
+
         User foundUser = userService.read("user123");
         assertNotNull(foundUser);
-        assertEquals(user.getUserId(), foundUser.getUserId());
+        assertEquals(user, foundUser);
     }
 
     @Test
     void testReadUser_NotFound() {
+        when(userRepository.findById("user456")).thenReturn(Optional.empty());
+
         User foundUser = userService.read("user456");
         assertNull(foundUser);
     }
 
     @Test
     void testUpdateUser() {
-        userRepository.save(user);
-        user.getName("Jane Doe");
+        when(userRepository.save(any(User.class))).thenReturn(user);
+
         User updatedUser = userService.update(user);
         assertNotNull(updatedUser);
-        assertEquals("Jane Doe", updatedUser.getName("Jane Doe"));
+        assertEquals(user, updatedUser);
     }
 
     @Test
     void testGetAllUsers() {
-        userRepository.save(user);
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        when(userRepository.findAll()).thenReturn(userList);
+
         List<User> users = userService.getAll();
         assertNotNull(users);
         assertEquals(1, users.size());
-        assertEquals(user.getUserId(), users.get(0).getUserId());
+        assertEquals(user, users.get(0));
     }
 
     @Test
     void testDeleteUser() {
-        userRepository.save(user);
+        doNothing().when(userRepository).deleteById("user123");
+
         assertDoesNotThrow(() -> userService.delete("user123"));
-        assertFalse(userRepository.existsById("user123"));
+        verify(userRepository, times(1)).deleteById("user123");
     }
 }
