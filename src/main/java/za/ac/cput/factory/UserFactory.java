@@ -8,7 +8,7 @@ public class UserFactory {
     public static User createUser(String userId, String name, String email, String phoneNumber) {
         if (Helper.isNullOrEmpty(userId) || Helper.isNullOrEmpty(name) ||
                 Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(phoneNumber)) {
-            return null; // or throw an IllegalArgumentException
+            return null;
         }
 
         return new User.UserBuilder()

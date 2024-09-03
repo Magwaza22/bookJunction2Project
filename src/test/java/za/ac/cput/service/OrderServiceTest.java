@@ -16,21 +16,21 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderServiceTest {
 
-    // services
+
     private final OrderService orderService;
     private final SellerService sellerService;
     private final BuyerService buyerService;
     private final BookService bookService;
     private final TransactionHistoryService historyService;
 
-    // class instances
+
     private za.ac.cput.domain.Order order1;
     private static Buyer buyer1;
     private static Seller seller1;
     private static Book book1;
     private static Author author1;
 
-    // constructor and dependency injection
+
     @Autowired
     OrderServiceTest(OrderService orderService, SellerService sellerService, BuyerService buyerService, BookService bookService, TransactionHistoryService historyService) {
         this.orderService = orderService;
@@ -40,7 +40,7 @@ class OrderServiceTest {
         this.historyService = historyService;
     }
 
-    // setting up of order
+
     @BeforeEach
     void setUp() {
 

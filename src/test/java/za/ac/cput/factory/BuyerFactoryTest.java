@@ -14,8 +14,8 @@ class BuyerFactoryTest {
     @Test
     void testCreateBuyer_ValidInputs() {
         Set<TransactionHistory> buyingHistory = new HashSet<>();
-        // Assuming TransactionHistory has a default constructor or factory method
-        buyingHistory.add(new TransactionHistory()); // Add a sample TransactionHistory
+
+        buyingHistory.add(new TransactionHistory());
 
         Buyer buyer = BuyerFactory.createBuyer(buyingHistory);
 

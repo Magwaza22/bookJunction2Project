@@ -14,8 +14,8 @@ class ListingFactoryTest {
     @Test
     void createListing() {
 
-            Book book = new Book(); // Assume Book has a default constructor
-            User user = new User(); // Assume User has a default constructor
+            Book book = new Book();
+            User user = new User();
             LocalDate dateListed = LocalDate.now();
             Double price = 29.99;
             String status = "Available";

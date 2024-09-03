@@ -14,6 +14,7 @@ import java.util.Optional;
 public class RatingService implements IRatingService{
 
 
+    @Autowired
     public RatingRepository rrepo;
 
     @Override
