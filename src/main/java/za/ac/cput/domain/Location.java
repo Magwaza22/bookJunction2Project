@@ -14,7 +14,7 @@ public class Location {
     @Column(name = "address")
     private String address;
 
-    protected Location() {
+    public Location() {
     }
 
     private Location(Builder builder) {

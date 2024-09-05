@@ -42,24 +42,23 @@ public class AppointmentService implements IAppointmentService {
         }
         return repository.save(appointment);
     }
-
+    @Autowired
+    private AppointmentRepository appointmentRepository;
     @Override
-    public void delete(Long appointmentId) {
-        SimpleJpaRepository appointmentRepository = null;
-        if (appointmentRepository.existsById(appointmentId)) {
-            appointmentRepository.deleteById(appointmentId);
-        } else {
-            throw new NoSuchElementException("Appointment not found.");
+
+        public void delete(Long appointmentId) {
+            if (appointmentRepository.existsById(appointmentId)) {
+                appointmentRepository.deleteById(appointmentId);
+            } else {
+                throw new NoSuchElementException("Appointment not found.");
+            }
         }
-    }
+     @Override
 
-
-    @Override
     public List<Appointment> getall() {
-        return repository.findAll();
+        return appointmentRepository.findAll();
     }
 
     public List<Appointment> getAll() {
         return null;
-    }
-}
+    }}
