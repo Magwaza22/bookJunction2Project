@@ -43,24 +43,21 @@ public class AppointmentServiceTest {
     @BeforeEach
     void setup() {
         try {
-            // Ensure no appointments exist before starting
+
             appointmentRepository.deleteAll();
             locationRepository.deleteAll();
             userRepository.deleteAll();
 
-            // Create and save a User object
-            user = UserFactory.createUser("user123", "John Doe", "john@example.com", "1234567890");
+            user = UserFactory.createUser("user123", "Mbali Cumalo", "cumalo@gmail.com", "1234567890");
             userRepository.save(user);
 
-            // Create and save Location object
             location = new Location.Builder()
                     .setAddress("143 Sir Lowry Rd")
                     .build();
-            location = locationRepository.save(location); // Save to database
+            location = locationRepository.save(location);
 
-            // Create an appointment with User and Location
             LocalDateTime dateTime = LocalDateTime.of(2024, 8, 17, 10, 15);
-            appointment = AppointmentFactory.createAppointment(null, user, "drop off", dateTime, location); // ID is null
+            appointment = AppointmentFactory.buildAppointment(user, "drop off", dateTime, location); // ID is null
         } catch (Exception e) {
             fail("Setup failed: " + e.getMessage());
         }
@@ -86,7 +83,7 @@ public class AppointmentServiceTest {
     @Order(2)
     void read() {
         try {
-            Appointment createdAppointment = appointmentService.create(appointment); // Create an appointment to read
+            Appointment createdAppointment = appointmentService.create(appointment);
             Appointment readAppointment = appointmentService.read(createdAppointment.getAppointmentId());
             assertNotNull(readAppointment, "The read appointment should not be null.");
             assertEquals(createdAppointment.getAppointmentId(), readAppointment.getAppointmentId(), "IDs should match.");
@@ -103,7 +100,7 @@ public class AppointmentServiceTest {
     @Order(3)
     void update() {
         try {
-            Appointment createdAppointment = appointmentService.create(appointment); // Create an appointment to update
+            Appointment createdAppointment = appointmentService.create(appointment);
             Appointment updatedAppointment = new Appointment.Builder()
                     .copy(createdAppointment)
                     .setDescription("Updated description")
@@ -121,9 +118,8 @@ public class AppointmentServiceTest {
     @Order(4)
     void getAll() {
         try {
-            // Create and save multiple Appointment objects
-            Appointment appointment1 = AppointmentFactory.createAppointment(null, user, "First appointment", LocalDateTime.now(), location);
-            Appointment appointment2 = AppointmentFactory.createAppointment(null, user, "Second appointment", LocalDateTime.now(), location);
+            Appointment appointment1 = AppointmentFactory.buildAppointment(user, "First appointment", LocalDateTime.now(), location);
+            Appointment appointment2 = AppointmentFactory.buildAppointment(user, "Second appointment", LocalDateTime.now(), location);
             appointmentService.create(appointment1);
             appointmentService.create(appointment2);
 
@@ -139,26 +135,18 @@ public class AppointmentServiceTest {
     }
 
 
-   // @Test
+    @Test
     @Order(5)
     void delete() {
-
         try {
             Appointment createdAppointment = appointmentService.create(appointment); // Create an appointment to delete
             Long id = createdAppointment.getAppointmentId();
 
-            // Ensure the appointment exists before deletion
             assertNotNull(appointmentService.read(id), "The appointment should exist before deletion.");
 
-            appointmentService.delete(id); // Delete the appointment
+            appointmentService.delete(id);
 
-            // Verify that the appointment has been deleted
-            assertThrows(NoSuchElementException.class, () -> {
-                Appointment deletedAppointment = appointmentService.read(id);
-                if (deletedAppointment == null) {
-                    throw new NoSuchElementException("Appointment not found.");
-                }
-            }, "The appointment should be deleted.");
+            assertThrows(NoSuchElementException.class, () -> appointmentService.read(id), "The appointment should be deleted.");
         } catch (Exception e) {
             fail("Delete test failed: " + e.getMessage());
         }
