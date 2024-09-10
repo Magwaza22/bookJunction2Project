@@ -12,7 +12,7 @@ public class Buyer extends User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer", fetch = FetchType.EAGER)
     private Set<TransactionHistory> buyingHistory;
 
-    protected Buyer() {
+    public Buyer() {
     }
 
     public Buyer(Builder builder) {

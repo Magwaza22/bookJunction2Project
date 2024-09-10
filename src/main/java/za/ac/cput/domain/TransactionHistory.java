@@ -35,9 +35,8 @@ public class TransactionHistory {
         return transaction_id;
     }
 
-//    public Book getBook_id() {
-//        return book_id;
-//    }
+    public Book getBook_id() {
+       return book_id; }
 
     public Buyer getBuyer() {
         return buyer;

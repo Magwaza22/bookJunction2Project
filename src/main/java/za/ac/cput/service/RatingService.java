@@ -14,6 +14,7 @@ import java.util.Optional;
 public class RatingService implements IRatingService{
 
 
+    @Autowired
     public RatingRepository rrepo;
 
     @Override
@@ -40,7 +41,7 @@ public class RatingService implements IRatingService{
     }
 
     @Override
-    public List getAll(Rating id) {
+    public List<Rating> getAll(Rating id) {
         return rrepo.findAll();
     }
 }

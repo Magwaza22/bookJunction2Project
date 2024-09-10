@@ -14,7 +14,7 @@ public class User implements Serializable {
     private String email;
     private String phoneNumber;
 
-    protected User() {
+    public User() {
     }
 
     protected User(UserBuilder builder) {
@@ -99,6 +99,9 @@ public class User implements Serializable {
         public User build() {
             return new User(this);
         }
+    }
+
+    public record Builder() {
     }
 }
 

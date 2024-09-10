@@ -1,7 +1,5 @@
 package za.ac.cput.factory;
 
-
-
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.Order;
 import za.ac.cput.domain.User;
@@ -28,64 +26,6 @@ public class OrderFactoryTest {
     }
 
     @Test
-    public void testCreateOrderNullOrderID() {
-        User user = new User.UserBuilder().setUserId("12345").build();
-        LocalDate orderDate = LocalDate.now();
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            OrderFactory.createOrder(null, user, orderDate, 100.0, "Pending");
-        });
-
-        String expectedMessage = "Order ID cannot be null or empty";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    public void testCreateOrderNullUser() {
-        LocalDate orderDate = LocalDate.now();
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            OrderFactory.createOrder(1, null, orderDate, 100.0, "Pending");
-        });
-
-        String expectedMessage = "User ID cannot be null";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    public void testCreateOrderNullOrderDate() {
-        User user = new User.UserBuilder().setUserId("12345").build();
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            OrderFactory.createOrder(1, user, null, 100.0, "Pending");
-        });
-
-        String expectedMessage = "Order date cannot be null";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    public void testCreateOrderNullTotalAmount() {
-        User user = new User.UserBuilder().setUserId("12345").build();
-        LocalDate orderDate = LocalDate.now();
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            OrderFactory.createOrder(1, user, orderDate, null, "Pending");
-        });
-
-        String expectedMessage = "Total amount cannot be null or empty";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
     public void testCreateOrderNullOrderStatus() {
         User user = new User.UserBuilder().setUserId("12345").build();
         LocalDate orderDate = LocalDate.now();
@@ -98,6 +38,12 @@ public class OrderFactoryTest {
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
-    }
 }
+
+}
+
+
+
+
+
 

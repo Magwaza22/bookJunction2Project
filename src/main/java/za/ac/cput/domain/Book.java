@@ -23,7 +23,7 @@ public class Book implements Serializable {
 
     private Double price;
 
-    protected Book() {
+    public Book() {
     }
 
     public Book(Builder builder) {

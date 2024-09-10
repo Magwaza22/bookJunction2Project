@@ -9,7 +9,7 @@ public class BookFactoryTest {
 
     @Test
     public void testCreateBook_Successful() {
-        byte[] bookPhoto = new byte[]{1, 2, 3}; // Example byte array for the book photo
+        byte[] bookPhoto = new byte[]{1, 2, 3};
 
         Book book = BookFactory.createBook(
                 1L,

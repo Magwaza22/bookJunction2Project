@@ -10,7 +10,7 @@ import java.util.Set;
 public class BuyerFactory {
     public static Buyer createBuyer(Set<TransactionHistory> buyingHistory) {
         if (buyingHistory == null || buyingHistory.isEmpty()) {
-            return null; // or throw an IllegalArgumentException
+            return null;
         }
 
         return new Buyer.Builder()
