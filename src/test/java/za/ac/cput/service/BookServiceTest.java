@@ -1,35 +1,39 @@
 package za.ac.cput.service;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import za.ac.cput.domain.Book;
 import za.ac.cput.factory.BookFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class BookServiceTest {
     @Autowired
     private BookService bookService;
-    private static Book book1;
-    private static Book book2;
+
+    private static Book book1, book2,book3;
 
     @BeforeEach
     void setUp() {
         byte[] bookPhoto = new byte[]{1, 2, 3};
-        book1 = BookFactory.createBook( 1L, bookPhoto, "978-3-16-148410-0", "Harry Potter", "First Edition",
-                "J.K.", "Rowling", "jk.rowling@example.com", "123-456-7890",
-                "British", 29.99);
+        book1 = BookFactory.createBook( 1, bookPhoto, "978-3-16-148410-0", "Harry Potter", "First Edition",
+                "J.K.", "Rowling",  29.99);
         assertNotNull(book1);
         System.out.println(book1);
-        book2 = BookFactory.createBook( 2L, bookPhoto, "338-3-16-1383920-2", "Mathematics Beginner", "Third Edition",
-                "Shawn", "Smith", "smithS@example.com", "075-477-0029",
-                "American", 106.99);
+        book2 = BookFactory.createBook( 2, bookPhoto, "338-3-16-1383920-2", "Mathematics Beginner", "Third Edition",
+                "Shawn", "Smith",  106.99);
         assertNotNull(book2);
         System.out.println(book2);
+        book3 = BookFactory.createBook( 3, bookPhoto, "338-3-16-138370-2", "Effective Java", "3rd Edition",
+                "Joshua", "Bloch",  78.99);
+        assertNotNull(book3);
+        System.out.println(book3);
 
     }
 
@@ -41,6 +45,9 @@ class BookServiceTest {
         Book created2 = bookService.create(book2);
         assertNotNull(created2);
         System.out.println(created2);
+        Book created3 = bookService.create(book3);
+        assertNotNull(created3);
+        System.out.println(created3);
     }
 
     @Test
