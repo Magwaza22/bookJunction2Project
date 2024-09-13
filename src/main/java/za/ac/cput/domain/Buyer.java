@@ -64,5 +64,4 @@ public class Buyer extends User {
             return new Buyer(this);
         }
     }
-
 }

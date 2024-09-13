@@ -5,17 +5,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import javax.sql.RowSet;
 import java.util.Objects;
+
 @Entity
 public class Admin {
   @Id
-  private Long adminID;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer adminID;
   private String name;
   private String email;
   private String password;
   private String phoneNumber;
-  protected Admin(){}
+
+  protected Admin() {}
 
   public Admin(Builder builder) {
     this.adminID = builder.adminID;
@@ -26,7 +28,7 @@ public class Admin {
   }
 
   // Getters
-  public Long getAdminID() {
+  public Integer getAdminID() {
     return adminID;
   }
 
@@ -51,7 +53,11 @@ public class Admin {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Admin admin = (Admin) o;
-    return Objects.equals(adminID, admin.adminID) && Objects.equals(name, admin.name) && Objects.equals(email, admin.email) && Objects.equals(password, admin.password) && Objects.equals(phoneNumber, admin.phoneNumber);
+    return Objects.equals(adminID, admin.adminID) &&
+            Objects.equals(name, admin.name) &&
+            Objects.equals(email, admin.email) &&
+            Objects.equals(password, admin.password) &&
+            Objects.equals(phoneNumber, admin.phoneNumber);
   }
 
   @Override
@@ -70,16 +76,15 @@ public class Admin {
             '}';
   }
 
-
   // Builder pattern implementation
   public static class Builder {
-    private Long adminID;
+    private Integer adminID;  // Change from Long to Integer
     private String name;
     private String email;
     private String password;
     private String phoneNumber;
 
-    public Builder setAdminID(Long adminID) {
+    public Builder setAdminID(Integer adminID) {
       this.adminID = adminID;
       return this;
     }
@@ -103,7 +108,8 @@ public class Admin {
       this.phoneNumber = phoneNumber;
       return this;
     }
-    public Builder copy(Admin admin){
+
+    public Builder copy(Admin admin) {
       this.adminID = admin.adminID;
       this.name = admin.name;
       this.email = admin.email;
@@ -111,6 +117,7 @@ public class Admin {
       this.phoneNumber = admin.phoneNumber;
       return this;
     }
+
     public Admin build() {
       return new Admin(this);
     }
