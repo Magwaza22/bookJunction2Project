@@ -8,8 +8,8 @@ import java.util.Objects;
 @Entity
 public class Book implements Serializable {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int bookID;
 
     @Lob
     private byte[] bookPhoto;
@@ -36,7 +36,7 @@ public class Book implements Serializable {
         this.price = builder.price;
     }
 
-    public Long getBookID() {
+    public int getBookID() {
         return bookID;
     }
 
@@ -98,7 +98,7 @@ public class Book implements Serializable {
     }
 
     public static class Builder {
-        private Long bookID;
+        private int bookID;
         private byte[] bookPhoto;
         private String ISBN;
         private String title;
@@ -106,7 +106,7 @@ public class Book implements Serializable {
         private Author author;
         private Double price;
 
-        public Builder setBookID(Long bookID) {
+        public Builder setBookID(int bookID) {
             this.bookID = bookID;
             return this;
         }
