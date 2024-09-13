@@ -9,7 +9,6 @@ public class Listing {
     private int listingID;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Book")
    private Book book;
 
     @ManyToOne
