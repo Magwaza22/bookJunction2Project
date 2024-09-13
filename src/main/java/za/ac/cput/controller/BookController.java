@@ -7,7 +7,7 @@ import za.ac.cput.service.BookService;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/book")
 public class BookController {
@@ -24,13 +24,12 @@ public class BookController {
 
     @GetMapping("/read/{id}")
     public Book read(@PathVariable String id) {
-        return service.read(Long.valueOf(id));
+        return service.read(Integer.valueOf(id));
     }
 
     @DeleteMapping("/deletebyid/{id}")
-    public void deleteByID(@PathVariable String id){service.delete(Long.valueOf(id));}
+    public void deleteByID(@PathVariable String id){service.delete(Integer.valueOf(id));}
 
     @GetMapping("/getall")
     public List<Book> getAll(){return service.getall();}
-
 }
