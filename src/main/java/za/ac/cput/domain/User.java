@@ -9,7 +9,8 @@ import java.util.Objects;
 public class User implements Serializable {
 
     @Id
-    private String userId; // seller and buyer
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer userId;
     private String name;
     private String email;
     private String phoneNumber;
@@ -24,7 +25,7 @@ public class User implements Serializable {
         this.phoneNumber = builder.phoneNumber;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {  // Change return type to Integer
         return userId;
     }
 
@@ -44,7 +45,10 @@ public class User implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(getUserId(), user.getUserId()) && Objects.equals(getName(), user.getName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPhoneNumber(), user.getPhoneNumber());
+        return Objects.equals(getUserId(), user.getUserId()) &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getEmail(), user.getEmail()) &&
+                Objects.equals(getPhoneNumber(), user.getPhoneNumber());
     }
 
     @Override
@@ -55,7 +59,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "userId='" + userId + '\'' +
+                "userId=" + userId +  // Change from String to Integer
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
@@ -63,12 +67,12 @@ public class User implements Serializable {
     }
 
     public static class UserBuilder {
-        protected String userId;
+        protected Integer userId;  // Change from String to Integer
         protected String name;
         protected String email;
         protected String phoneNumber;
 
-        public UserBuilder setUserId(String userId) {
+        public UserBuilder setUserId(Integer userId) {  // Change from String to Integer
             this.userId = userId;
             return this;
         }
@@ -100,8 +104,4 @@ public class User implements Serializable {
             return new User(this);
         }
     }
-
-    public record Builder() {
-    }
 }
-
