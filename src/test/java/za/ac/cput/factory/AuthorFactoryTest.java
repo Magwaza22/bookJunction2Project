@@ -9,13 +9,11 @@ public class AuthorFactoryTest {
 
     @Test
     public void testCreateAuthor_Successful() {
-        Author author = AuthorFactory.createAuthor("J.K.", "Rowling","rowling@pub.org",  "0748274967", "American");
+        Author author = AuthorFactory.createAuthor("J.K.", "Rowling");
         assertNotNull(author);
         assertEquals("J.K.", author.getFirstName());
         assertEquals("Rowling", author.getLastName());
-        assertEquals("rowling@pub.org", author.getEmail());
-        assertEquals("0748274967", author.getPhoneNumber());
-        assertEquals("American", author.getNationality());
+
     }
 
 }
