@@ -1,24 +1,18 @@
 package za.ac.cput.factory;
 
 import za.ac.cput.domain.Location;
+import za.ac.cput.util.Helper;
 
 public class LocationFactory {
 
-    public static Location createLocation(String address) {
-        if (address == null || address.isEmpty()) {
-            throw new IllegalArgumentException("Address cannot be null or empty");
+    public static Location buildLocation(String address) {
+
+        if (Helper.isNullOrEmpty(address)) {
+            return null;
         }
+
         return new Location.Builder()
                 .setAddress(address)
-                .build();
-    }
-
-    public static Location copyLocation(Location location) {
-        if (location == null) {
-            throw new IllegalArgumentException("Location cannot be null");
-        }
-        return new Location.Builder()
-                .copy(location)
                 .build();
     }
 }
