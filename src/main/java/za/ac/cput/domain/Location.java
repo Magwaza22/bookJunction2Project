@@ -9,7 +9,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id")
-    private Long id;
+    private int id;
 
     @Column(name = "address")
     private String address;
@@ -22,7 +22,7 @@ public class Location {
         this.address = builder.address;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -39,7 +39,7 @@ public class Location {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Location that = (Location) o;
-        return Objects.equals(id, that.id) &&
+        return id == that.id &&
                 Objects.equals(address, that.address);
     }
 
@@ -57,10 +57,10 @@ public class Location {
     }
 
     public static class Builder {
-        private Long id;
+        private int id;
         private String address;
 
-        public Builder setId(Long id) {
+        public Builder setId(int id) {
             this.id = id;
             return this;
         }
