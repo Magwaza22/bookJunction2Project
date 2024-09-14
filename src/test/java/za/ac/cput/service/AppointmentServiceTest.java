@@ -48,7 +48,7 @@ public class AppointmentServiceTest {
             locationRepository.deleteAll();
             userRepository.deleteAll();
 
-            user = UserFactory.createUser("user123", "Mbali Cumalo", "cumalo@gmail.com", "1234567890");
+            user = UserFactory.createUser(1234, "Mbali Cumalo", "cumalo@gmail.com", "1234567890");
             userRepository.save(user);
 
             location = new Location.Builder()

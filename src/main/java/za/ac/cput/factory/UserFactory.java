@@ -5,9 +5,8 @@ import za.ac.cput.util.Helper;
 
 public class UserFactory {
 
-    public static User createUser(String userId, String name, String email, String phoneNumber) {
-        if (Helper.isNullOrEmpty(userId) || Helper.isNullOrEmpty(name) ||
-                Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(phoneNumber)) {
+    public static User createUser(Integer userId, String name, String email, String phoneNumber) {
+        if (userId == null || userId <= 0 || Helper.isNullOrEmpty(name) || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(phoneNumber)) {
             return null;
         }
 
@@ -19,7 +18,4 @@ public class UserFactory {
                 .build();
     }
 
-    public static User buildUser(String userId, String name, String email, String phoneNumber) {
-        throw new UnsupportedOperationException();
-    }
 }

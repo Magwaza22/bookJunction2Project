@@ -18,6 +18,6 @@ public class TransactionHistoryController {
     public TransactionHistory save(@RequestBody TransactionHistory transactionHistory){ return service.create(transactionHistory);}
 
     @GetMapping("/read")
-    public TransactionHistory read(@PathVariable String id) { return service.read(id);}
+    public TransactionHistory read(@PathVariable int id) { return service.read(id);}
 
 }

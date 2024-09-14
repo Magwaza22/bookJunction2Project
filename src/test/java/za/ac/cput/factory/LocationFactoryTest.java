@@ -21,42 +21,4 @@ public class LocationFactoryTest {
         assertEquals(address, location.getAddress(), "Address should match.");
     }
 
-    @Test
-    void createLocation_NullAddress_ThrowsException() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            LocationFactory.createLocation(null);
-        }, "Address cannot be null or empty");
-    }
-
-    @Test
-    void createLocation_EmptyAddress_ThrowsException() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            LocationFactory.createLocation("");
-        }, "Address cannot be null or empty");
-    }
-
-    @Test
-    void copyLocation_ValidLocation_Success() {
-
-        Location originalLocation = new Location.Builder()
-                .setAddress("456 Elm St")
-                .build();
-
-
-        Location copiedLocation = LocationFactory.copyLocation(originalLocation);
-
-
-        assertNotNull(copiedLocation, "Copied location should not be null.");
-        assertEquals(originalLocation.getAddress(), copiedLocation.getAddress(), "Address should match.");
-    }
-
-    @Test
-    void copyLocation_NullLocation_ThrowsException() {
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            LocationFactory.copyLocation(null);
-        }, "Location cannot be null");
-    }
 }

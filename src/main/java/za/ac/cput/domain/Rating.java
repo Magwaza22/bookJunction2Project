@@ -30,8 +30,8 @@ public class Rating {
         valueRating = builder.valueRating;
         deliveryRating = builder.deliveryRating;
         accuracyOfRating = builder.accuracyOfRating;
-        date = this.date;
-
+        date = builder.date;
+        user = builder.user;
     }
 
     public Long getId() {return id;}
@@ -62,17 +62,21 @@ public class Rating {
 
     public LocalDate getDate() {return date;}
 
+    public User getUser() {
+        return user;
+    }
+
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rating rating = (Rating) o;
-        return overAllRating == rating.overAllRating && bookConditionRating == rating.bookConditionRating && sellerReliabilityRating == rating.sellerReliabilityRating && valueRating == rating.valueRating && deliveryRating == rating.deliveryRating && accuracyOfRating == rating.accuracyOfRating && Objects.equals(id, rating.id) && Objects.equals(date, rating.date) && Objects.equals(user, rating.user);
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Rating rating)) return false;
+        return getOverAllRating() == rating.getOverAllRating() && getBookConditionRating() == rating.getBookConditionRating() && getSellerReliabilityRating() == rating.getSellerReliabilityRating() && getValueRating() == rating.getValueRating() && getDeliveryRating() == rating.getDeliveryRating() && getAccuracyOfRating() == rating.getAccuracyOfRating() && Objects.equals(getId(), rating.getId()) && Objects.equals(getDate(), rating.getDate()) && Objects.equals(getUser(), rating.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, overAllRating, bookConditionRating, sellerReliabilityRating, valueRating, deliveryRating, accuracyOfRating, date, user);
+        return Objects.hash(getId(), getOverAllRating(), getBookConditionRating(), getSellerReliabilityRating(), getValueRating(), getDeliveryRating(), getAccuracyOfRating(), getDate(), getUser());
     }
 
     @Override

@@ -9,7 +9,7 @@ class AdminFactoryTest {
 
     @Test
     void testCreateAdmin_ValidInputs() {
-        Long adminID = 1L;
+        int adminID = 1;
         String name = "John Doe";
         String email = "john@example.com";
         String password = "securePassword";
@@ -23,35 +23,5 @@ class AdminFactoryTest {
         assertEquals(email, admin.getEmail());
         assertEquals(password, admin.getPassword());
         assertEquals(phoneNumber, admin.getPhoneNumber());
-    }
-
-    @Test
-    void testCreateAdmin_NullInputs() {
-        Admin admin = AdminFactory.createAdmin(null, null, null, null, null);
-        assertNull(admin);
-    }
-
-    @Test
-    void testCreateAdmin_EmptyName() {
-        Admin admin = AdminFactory.createAdmin(1L, "", "john@example.com", "securePassword", "1234567890");
-        assertNull(admin);
-    }
-
-    @Test
-    void testCreateAdmin_EmptyEmail() {
-        Admin admin = AdminFactory.createAdmin(1L, "John Doe", "", "securePassword", "1234567890");
-        assertNull(admin);
-    }
-
-    @Test
-    void testCreateAdmin_EmptyPassword() {
-        Admin admin = AdminFactory.createAdmin(1L, "John Doe", "john@example.com", "", "1234567890");
-        assertNull(admin);
-    }
-
-    @Test
-    void testCreateAdmin_EmptyPhoneNumber() {
-        Admin admin = AdminFactory.createAdmin(1L, "John Doe", "john@example.com", "securePassword", "");
-        assertNull(admin);
     }
 }

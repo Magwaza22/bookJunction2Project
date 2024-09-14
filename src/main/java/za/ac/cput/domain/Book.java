@@ -19,12 +19,11 @@ public class Book implements Serializable {
     private String edition;
 
     @Embedded
-    private Author author; // Embedded relationship
+    private Author author;
 
     private Double price;
 
-    public Book() {
-    }
+    public Book() {}
 
     public Book(Builder builder) {
         this.bookID = builder.bookID;
@@ -65,23 +64,20 @@ public class Book implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book book)) return false;
-        return Objects.equals(getBookID(), book.getBookID()) &&
-                Arrays.equals(getBookPhoto(), book.getBookPhoto()) &&
-                Objects.equals(getISBN(), book.getISBN()) &&
-                Objects.equals(getTitle(), book.getTitle()) &&
-                Objects.equals(getEdition(), book.getEdition()) &&
-                Objects.equals(getAuthor(), book.getAuthor()) &&
-                Objects.equals(getPrice(), book.getPrice());
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Book book)) return false;
+        return bookID == book.bookID &&
+                Objects.equals(ISBN, book.ISBN) &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(edition, book.edition) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(price, book.price);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getBookID(), getISBN(), getTitle(), getEdition(), getAuthor(), getPrice());
-        result = 31 * result + Arrays.hashCode(getBookPhoto());
-        return result;
+        return Objects.hash(bookID, ISBN, title, edition, author, price);
     }
 
     @Override

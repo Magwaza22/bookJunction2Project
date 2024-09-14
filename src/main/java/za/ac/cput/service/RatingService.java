@@ -24,9 +24,7 @@ public class RatingService implements IRatingService{
 
     @Override
     public Rating read(Long id) {
-
-        Optional<Rating> rating = rrepo.findById(id);
-        return rating.orElse(null);
+        return rrepo.findById(id).orElseThrow();
     }
 
 
@@ -35,13 +33,9 @@ public class RatingService implements IRatingService{
         return rrepo.save(rating);
     }
 
-    @Override
-    public void FindRatingByUser(User id) {
-
-    }
 
     @Override
-    public List<Rating> getAll(Rating id) {
+    public List<Rating> getAll() {
         return rrepo.findAll();
     }
 }

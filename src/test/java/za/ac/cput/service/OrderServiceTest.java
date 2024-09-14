@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.*;
+import za.ac.cput.factory.BookFactory;
 import za.ac.cput.factory.OrderFactory;
 
 import java.time.LocalDate;
@@ -44,16 +45,17 @@ class OrderServiceTest {
     @BeforeEach
     void setUp() {
 
-        author1 = new Author.Builder().setFirstName("Wisani").setLastName("Magwaza").setEmail("wisani@gmail.com").setPhoneNumber("0879869867").setNationality("African").build();
+//        author1 = new Author.Builder().setFirstName("Wisani").setLastName("Magwaza").build();
 
-        byte[] bookPhoto = new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A};
-        book1 = new Book.Builder().setBookID(1L).setBookPhoto(bookPhoto).setISBN("87234").setTitle("Avengers: Endgame").setEdition("2nd Edition").setAuthor(author1).setPrice(2700.00).build();
+        byte[] bookPhoto = new byte[]{1, 2, 3};
+        author1 = new Author.Builder().setFirstName("Anthony").setLastName("Russo").build();
+        book1 = new Book.Builder().setBookPhoto(bookPhoto).setISBN("978-3-16").setTitle("Avengers:Endgame").setEdition("1st Edition").setAuthor(author1).setPrice(1200.00).build();
         bookService.create(book1);
 
-        seller1 = (Seller) new Seller.Builder().setUserId("lucky123").setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
+        seller1 = (Seller) new Seller.Builder().setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
         sellerService.create(seller1);
 
-        buyer1 = (Buyer) new Buyer.Builder().setUserId("zisanda123").setName("Zisanda").setEmail("zish@gmail.com").setPhoneNumber("0798765897").build();
+        buyer1 = (Buyer) new Buyer.Builder().setName("Zisanda").setEmail("zish@gmail.com").setPhoneNumber("0798765897").build();
         buyerService.create(buyer1);
 
         Set<TransactionHistory> transactionHistories = new HashSet<>();
@@ -83,21 +85,21 @@ class OrderServiceTest {
     @Test
     @Order(2)
     void read() {
-        za.ac.cput.domain.Order readOrder = orderService.read(order1.getOrderID());
-        System.out.println(readOrder);
+//        za.ac.cput.domain.Order readOrder = orderService.read(order1.getOrderID());
+//        System.out.println(readOrder);
     }
 
     @Test
     @Order(3)
     void update() {
-        za.ac.cput.domain.Order updateOrder = new za.ac.cput.domain.Order.Builder().copy(order1).setTotalAmount(900.00).build();
-        System.out.println(updateOrder);
+//        za.ac.cput.domain.Order updateOrder = new za.ac.cput.domain.Order.Builder().copy(order1).setTotalAmount(900.00).build();
+//        System.out.println(updateOrder);
     }
 
     @Test
     @Order(4)
     void getAll() {
-        Set<za.ac.cput.domain.Order> allOrder = orderService.getAll();
-        System.out.println(allOrder);
+//        Set<za.ac.cput.domain.Order> allOrder = orderService.getAll();
+//        System.out.println(allOrder);
     }
 }

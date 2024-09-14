@@ -1,12 +1,15 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+
 @Entity
-public class TransactionHistory {
+public class TransactionHistory implements Serializable {
     @Id
     private int transaction_id;
+
     @ManyToOne
     @JoinColumn(name = "bookid")
     private Book book_id;
@@ -18,12 +21,12 @@ public class TransactionHistory {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private Seller seller;
+
     private LocalDate date;
 
-    public TransactionHistory(){
+    public TransactionHistory() {}
 
-    }
-    private TransactionHistory(Builder builder){
+    private TransactionHistory(Builder builder) {
         this.transaction_id = builder.transaction_id;
         this.book_id = builder.book_id;
         this.buyer = builder.buyer;
@@ -36,7 +39,8 @@ public class TransactionHistory {
     }
 
     public Book getBook_id() {
-       return book_id; }
+        return book_id;
+    }
 
     public Buyer getBuyer() {
         return buyer;
@@ -51,27 +55,20 @@ public class TransactionHistory {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TransactionHistory that)) return false;
-        return getTransaction_id() == that.getTransaction_id() && Objects.equals(book_id, that.book_id) && Objects.equals(getBuyer(), that.getBuyer()) && Objects.equals(getSeller(), that.getSeller()) && Objects.equals(getDate(), that.getDate());
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof TransactionHistory that)) return false;
+        return transaction_id == that.transaction_id &&
+                Objects.equals(book_id.getBookID(), that.book_id.getBookID()) &&
+                Objects.equals(buyer.getUserId(), that.buyer.getUserId()) &&
+                Objects.equals(seller.getUserId(), that.seller.getUserId()) &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTransaction_id(), getDate());
+        return Objects.hash(transaction_id, book_id.getBookID(), buyer.getUserId(), seller.getUserId(), date);
     }
-
-//    @Override
-//    public String toString() {
-//        return "TransactionHistory{" +
-//                ", transaction_id=" + transaction_id +
-//                ", book_id=" + book_id +
-//                ", buyer=" + buyer +
-//                ", seller=" + seller +
-//                ", date=" + date +
-//                '}';
-//    }
 
     public static class Builder {
         private int transaction_id;
@@ -100,11 +97,12 @@ public class TransactionHistory {
             return this;
         }
 
-        public Builder  setDate(LocalDate date) {
+        public Builder setDate(LocalDate date) {
             this.date = date;
             return this;
         }
-        public Builder copy(TransactionHistory t){
+
+        public Builder copy(TransactionHistory t) {
             this.transaction_id = t.transaction_id;
             this.book_id = t.book_id;
             this.buyer = t.buyer;
@@ -112,6 +110,9 @@ public class TransactionHistory {
             this.date = t.date;
             return this;
         }
-        public TransactionHistory build(){return new TransactionHistory(this);}
+
+        public TransactionHistory build() {
+            return new TransactionHistory(this);
+        }
     }
 }

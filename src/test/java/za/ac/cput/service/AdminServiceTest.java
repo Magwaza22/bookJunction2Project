@@ -28,7 +28,7 @@ class AdminServiceTest {
     @BeforeEach
     void setUp() {
         admin = new Admin.Builder()
-                .setAdminID(1L)
+                .setAdminID(1)
                 .setName("John Doe")
                 .setEmail("john@example.com")
                 .setPassword("securePassword")

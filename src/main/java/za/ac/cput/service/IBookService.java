@@ -4,9 +4,9 @@ import za.ac.cput.domain.Book;
 
 import java.util.List;
 
-public interface IBookService extends IService<Book, Long>{
+public interface IBookService extends IService<Book, Integer>{
 
-    void delete(Long bookID);
+    void delete(int bookID);
     List<Book> getall();
 
 }

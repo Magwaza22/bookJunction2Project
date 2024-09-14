@@ -16,26 +16,15 @@ public class ListingService implements IListingService {
     public Listing create(Listing listing) {return listingRepository.save(listing);}
 
     @Override
-    public Listing read(String string){return listingRepository.findById(string).orElse(null);}
+    public Listing read(Integer listingID) {return listingRepository.findById(listingID).orElseThrow();}
 
     @Override
     public Listing update(Listing listing) {return listingRepository.save(listing);}
 
-
     @Override
-    public void delete(String listingID){listingRepository.deleteById(listingID);}
+    public void delete(int listingID){listingRepository.deleteById(listingID);}
 
     @Override
     public List<Listing> getall(){return listingRepository.findAll();}
-
-    @Override
-    public List<Listing> getAllListings() {
-        return List.of();
-    }
-
-    @Override
-    public void deleteListing(int listingID) {
-
-    }
 
 }

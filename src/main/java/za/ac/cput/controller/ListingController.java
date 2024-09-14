@@ -19,10 +19,10 @@ public class ListingController {
     public Listing save(@RequestBody Listing listing){return service.create(listing);}
 
    @GetMapping(value = "read/{id}")
-    public Listing read(@PathVariable String id){return service.read(id);}
+    public Listing read(@PathVariable int id){return service.read(id);}
 
     @DeleteMapping("/deletebyid/{id}")
-    public void delete(@PathVariable String id){service.delete(id);}
+    public void delete(@PathVariable int id){service.delete(id);}
 
     @GetMapping("/getall")
     public List<Listing> getAll(){return service.getall();}

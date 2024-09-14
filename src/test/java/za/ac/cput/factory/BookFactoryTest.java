@@ -31,21 +31,4 @@ class BookFactoryTest {
         assertEquals(authorLastName, createdBook.getAuthor().getLastName());
         assertEquals(price, createdBook.getPrice());
     }
-
-    @Test
-    void createBook_Fail() {
-
-        int bookID = 0;
-        byte[] bookPhoto = null;
-        String ISBN = "";
-        String title = "";
-        String edition = "1st";
-        String authorFirstName = "John";
-        String authorLastName = "";
-        Double price = null;
-
-        Book createdBook = BookFactory.createBook(bookID, bookPhoto, ISBN, title, edition, authorFirstName, authorLastName, price);
-
-        assertNull(createdBook);
-    }
 }

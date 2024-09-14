@@ -23,12 +23,12 @@ public class BookController {
     }
 
     @GetMapping("/read/{id}")
-    public Book read(@PathVariable String id) {
-        return service.read(Long.valueOf(id));
+    public Book read(@PathVariable int id) {
+        return service.read(id);
     }
 
     @DeleteMapping("/deletebyid/{id}")
-    public void deleteByID(@PathVariable String id){service.delete(Long.valueOf(id));}
+    public void deleteByID(@PathVariable int id){service.delete(id);}
 
     @GetMapping("/getall")
     public List<Book> getAll(){return service.getall();}

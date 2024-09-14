@@ -11,21 +11,22 @@ public class TransactionHistoryService implements ITransactionHistoryService{
     @Autowired
     TransactionHistoryService(TransactionHistoryRepository transactionHistoryRepository) {this.transactionHistoryRepository = transactionHistoryRepository;}
 
+
     @Override
     public TransactionHistory create(TransactionHistory transactionHistory) {
-        return null;
+        return transactionHistoryRepository.save(transactionHistory);
     }
 
     @Override
-    public TransactionHistory read(String s) {
-        return null;
+    public TransactionHistory read(Integer id) {
+        return transactionHistoryRepository.findById(id).orElseThrow();
     }
 
     @Override
     public TransactionHistory update(TransactionHistory transactionHistory) {
-        return null;
+        return transactionHistoryRepository.save(transactionHistory);
     }
-    }
+}
 
 
 

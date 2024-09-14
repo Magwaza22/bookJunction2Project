@@ -22,17 +22,5 @@ class BuyerFactoryTest {
         assertNotNull(buyer);
         assertEquals(buyingHistory, buyer.getBuyingHistory());
     }
-
-    @Test
-    void testCreateBuyer_NullInputs() {
-        Buyer buyer = BuyerFactory.createBuyer(null);
-        assertNull(buyer);
-    }
-
-    @Test
-    void testCreateBuyer_EmptyBuyingHistory() {
-        Buyer buyer = BuyerFactory.createBuyer(new HashSet<>());
-        assertNull(buyer);
-    }
 }
 

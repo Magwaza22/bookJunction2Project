@@ -1,16 +1,85 @@
 package za.ac.cput.service;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.domain.*;
 
- import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ListingServiceTest {
+
+    private final BookService bookService;
+    private final SellerService sellerService;
+    private final BuyerService buyerService;
+    private final TransactionHistoryService historyService;
+    private final ListingService listingService;
+
+    @Autowired
+    public ListingServiceTest(BookService bookService, SellerService sellerService, BuyerService buyerService, TransactionHistoryService historyService, ListingService listingService) {
+        this.bookService = bookService;
+        this.sellerService = sellerService;
+        this.buyerService = buyerService;
+        this.historyService = historyService;
+        this.listingService = listingService;
+    }
+
+    private Book book1;
+    private Author author;
+    private Seller seller1;
+    private Buyer buyer1;
+    private Listing listing;
+
+    @BeforeEach
+    public void setup(){
+        byte[] bookPhoto = new byte[]{1, 2, 3};
+        author = new Author.Builder().setFirstName("Anthony").setLastName("Russo").build();
+        book1 = new Book.Builder().setBookPhoto(bookPhoto).setISBN("978-3-16").setTitle("Avengers:Endgame").setEdition("1st Edition").setAuthor(author).setPrice(1200.00).build();
+        bookService.create(book1);
+
+        seller1 = (Seller) new Seller.Builder().setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
+        sellerService.create(seller1);
+
+        buyer1 = (Buyer) new Buyer.Builder().setName("Zisanda").setEmail("zish@gmail.com").setPhoneNumber("0798765897").build();
+        buyerService.create(buyer1);
+
+        Set<TransactionHistory> transactionHistories = new HashSet<>();
+        TransactionHistory transactionHistory = new TransactionHistory.Builder().setTransaction_id(432).setBook_id(book1).setBuyer(buyer1).setSeller(seller1).setDate(LocalDate.now()).build();
+        historyService.create(transactionHistory);
+
+        transactionHistories.add(transactionHistory);
+
+        seller1 = new Seller.Builder().copy(seller1).setInventory(transactionHistories).build();
+        buyer1 = new Buyer.Builder().copy(buyer1).setBuyingHistory(transactionHistories).build();
+
+        buyerService.update(buyer1);
+        sellerService.update(seller1);
+
+        listing = new Listing.Builder().setListingID(1).setUserID(seller1).setBookID(book1).setDateListed(LocalDate.now()).setPrice(800.00).setStatus("Sold").setCondition("Good").build();
+
+    }
 
     @Test
     void create() {
+        Listing createdListing = listingService.create(listing);
+        assertNotNull(createdListing);
+        System.out.println(createdListing);
     }
 
     @Test
     void read() {
+        Listing read = listingService.read(listing.getListingID());
+        assertNotNull(read);
+        System.out.println(read);
     }
 
     @Test
@@ -18,7 +87,8 @@ class ListingServiceTest {
     }
 
     @Test
-    void getAllListings() {
+    void getAll() {
+        listingService.getall();
     }
 
     @Test

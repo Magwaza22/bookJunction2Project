@@ -29,14 +29,13 @@ public class Buyer extends User {
         if (this == o) return true;
         if (!(o instanceof Buyer buyer)) return false;
         if (!super.equals(o)) return false;
-        return Objects.equals(getBuyingHistory(), buyer.getBuyingHistory());
+        return Objects.equals(getUserId(), buyer.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getBuyingHistory());
+        return Objects.hash(super.hashCode(), getUserId());
     }
-
     @Override
     public String toString() {
         return "Buyer{" +
