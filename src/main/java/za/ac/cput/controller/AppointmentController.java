@@ -25,13 +25,13 @@ public class AppointmentController {
     }
 
     @GetMapping("/read/{id}")
-    public Appointment read(@PathVariable String id) {
-        return service.read(Long.valueOf(id));
+    public Appointment read(@PathVariable int id) {
+        return service.read(id);
     }
 
     @DeleteMapping("/deletebyid/{id}")
-    public void deleteByID(@PathVariable String id) {
-        service.delete(Long.valueOf(id));
+    public void deleteByID(@PathVariable int id) {
+        service.delete(id);
     }
 
     @GetMapping("/getall")

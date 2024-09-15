@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Appointment;
 
 @Repository
-public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
 }
-

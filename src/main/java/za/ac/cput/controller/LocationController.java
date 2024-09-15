@@ -25,12 +25,12 @@ public class LocationController {
     }
 
     @GetMapping("/read/{id}")
-    public Location read(@PathVariable Long id) {
+    public Location read(@PathVariable int id) {
         return service.read(id);
     }
 
     @DeleteMapping("/deletebyid/{id}")
-    public void deleteByID(@PathVariable Long id) {
+    public void deleteByID(@PathVariable int id) {
         service.delete(id);
     }
 
@@ -39,4 +39,3 @@ public class LocationController {
         return service.getAll();
     }
 }
-
