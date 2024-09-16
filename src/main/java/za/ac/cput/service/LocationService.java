@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Location;
 import za.ac.cput.repository.LocationRepository;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -13,7 +14,7 @@ public class LocationService implements ILocationService {
 
     @Autowired
     public LocationService(LocationRepository repository) {
-        this.repository = repository; // Correctly assigning repository in constructor
+        this.repository = repository;
     }
 
     @Override
@@ -22,12 +23,7 @@ public class LocationService implements ILocationService {
     }
 
     @Override
-    public Location read(String s) {
-        return null;
-    }
-
-    @Override
-    public Location read(Long id) { // Changed from String to Long
+    public Location read(Integer id) { // Changed from Long to Integer to match ID type
         return repository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Location not found with id: " + id));
     }
@@ -41,32 +37,15 @@ public class LocationService implements ILocationService {
     }
 
     @Override
-    public List<Location> getAll() { // Changed method name to match typical convention
+    public List<Location> getAll() { // Standard method name
         return repository.findAll();
     }
 
     @Override
-    public List<Location> getall() {
-        return getAll(); // Return the result from getAll()
-    }
-
-    @Override
-    public void delete(Long id) {
+    public void delete(Integer id) { // Changed from Long to Integer to match ID type
         if (!repository.existsById(id)) {
             throw new NoSuchElementException("Location not found with id: " + id);
         }
         repository.deleteById(id);
     }
-
-    public Location saveLocation(Location location) {
-        return location;
-    }
-
-    public Location getLocationById(Long locationId) {
-
-        return null;
-    }
-        public void deleteLocation (Long locationId){
-        }
-    }
-
+}

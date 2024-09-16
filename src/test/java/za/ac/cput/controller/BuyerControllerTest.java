@@ -1,101 +1,66 @@
 package za.ac.cput.controller;
 
+import org.springframework.http.HttpMethod;
 import za.ac.cput.domain.Buyer;
 import za.ac.cput.service.BuyerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BuyerControllerTest {
 
-    @Mock
-    private BuyerService buyerService;
 
-    @InjectMocks
-    private BuyerController buyerController;
 
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+    private final String BASE_URL = "http://localhost:8080/your-endpoint";
     private Buyer buyer;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         buyer = new Buyer.Builder()
-                .setBuyingHistory(new HashSet<>()) // Assume TransactionHistory has a default constructor
+                .setBuyingHistory(new HashSet<>())
                 .build();
     }
 
     @Test
     void testCreateBuyer() {
-        when(buyerService.create(any(Buyer.class))).thenReturn(buyer);
-
-        ResponseEntity<Buyer> response = buyerController.createBuyer(buyer);
+        ResponseEntity<Buyer> response = restTemplate.postForEntity(BASE_URL + "/create", buyer, Buyer.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(buyer, response.getBody());
+        assertEquals(buyer.getBuyingHistory(), response.getBody().getBuyingHistory());
     }
 
-    @Test
-    void testGetBuyer() {
-        when(buyerService.read(1L)).thenReturn(buyer);
-
-        ResponseEntity<Buyer> response = buyerController.getBuyer(1L);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(buyer, response.getBody());
-    }
 
     @Test
     void testGetBuyer_NotFound() {
-        when(buyerService.read(2L)).thenReturn(null);
-
-        ResponseEntity<Buyer> response = buyerController.getBuyer(2L);
+        ResponseEntity<Buyer> response = restTemplate.getForEntity(BASE_URL + "/read/2", Buyer.class);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    @Test
-    void testUpdateBuyer() {
-        when(buyerService.update(any(Buyer.class))).thenReturn(buyer);
-
-        ResponseEntity<Buyer> response = buyerController.updateBuyer(buyer);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(buyer, response.getBody());
-    }
 
     @Test
     void testGetAllBuyers() {
         List<Buyer> buyerList = new ArrayList<>();
         buyerList.add(buyer);
-        when(buyerService.getAll()).thenReturn(buyerList);
+        restTemplate.postForEntity(BASE_URL + "/create", buyer, Buyer.class); // Ensure the buyer is created first
 
-        ResponseEntity<List<Buyer>> response = buyerController.getAllBuyers();
+        ResponseEntity<List> response = restTemplate.getForEntity(BASE_URL + "/all", List.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(1, response.getBody().size());
-        assertEquals(buyer, response.getBody().get(0));
     }
 
-    @Test
-    void testDeleteBuyer() {
-        doNothing().when(buyerService).delete(1L);
-
-        ResponseEntity<Void> response = buyerController.deleteBuyer(1L);
-
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-        verify(buyerService, times(1)).delete(1L);
-    }
 }

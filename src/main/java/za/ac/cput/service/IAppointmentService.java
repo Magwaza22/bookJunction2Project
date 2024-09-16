@@ -4,11 +4,10 @@ import za.ac.cput.domain.Appointment;
 
 import java.util.List;
 
-public interface IAppointmentService extends IService<Appointment, String> {
+public interface IAppointmentService extends IService<Appointment, Integer> {
 
-    Appointment read(Long appointmentId);
+    void delete(Integer appointmentId);
 
-    void delete(Long id);
-
-    List<Appointment> getall();
+    List<Appointment> getAll();
 }
+

@@ -22,8 +22,8 @@ public class BuyerService implements IBuyerService {
     }
 
     @Override
-    public Buyer read(Long buyerID) {
-        return buyerRepository.findById(String.valueOf(buyerID)).orElse(null);
+    public Buyer read(Integer buyerID) {
+        return buyerRepository.findById(Integer.valueOf(String.valueOf(buyerID))).orElse(null);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class BuyerService implements IBuyerService {
     }
 
     @Override
-    public void delete(Long buyerID) {
-        buyerRepository.deleteById(String.valueOf(buyerID));
+    public void delete(Integer buyerID) {
+        buyerRepository.deleteById(Integer.valueOf(String.valueOf(buyerID)));
     }
 }

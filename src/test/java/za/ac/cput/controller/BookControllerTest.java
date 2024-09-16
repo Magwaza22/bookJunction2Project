@@ -28,9 +28,12 @@ class BookControllerTest {
     @BeforeAll
     public static void setUp() {
         byte[] bookPhoto = new byte[]{1, 2, 3};
-        book = BookFactory.createBook(3L, bookPhoto, "267-3-16-28861-2", "Java Programming", "Third Edition",
-                "Ted", "James", "jamesT@example.com", "089-289-6729",
-                "British", 302.99);
+        book = BookFactory.createBook(4, bookPhoto, "267-3-16-28861-2", "Java Programming", "Third Edition",
+                "Ted", "James",  302.99);
+    }
+
+    public static void setBookController(BookController bookController) {
+        BookControllerTest.bookController = bookController;
     }
 
     @Test
@@ -69,11 +72,8 @@ class BookControllerTest {
         List<Book> bookList = new ArrayList<>();
         bookList.add(book);
         when(bookController.getAll()).thenReturn(bookList);
-
         ResponseEntity<List<Book>> response = (ResponseEntity<List<Book>>) bookController.getAll();
-
         assertEquals(HttpStatus.OK, response.getStatusCode());
-       // assertEquals(1, response.getBody().size());
         //assertEquals(book, response.getBody().get(0));
     }
 }

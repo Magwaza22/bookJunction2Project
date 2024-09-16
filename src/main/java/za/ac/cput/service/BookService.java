@@ -23,8 +23,8 @@ public class BookService implements IBookService{
     }
 
     @Override
-    public Book read(Long aLong) {
-        return bookRepository.findById(aLong).orElse(null);
+    public Book read(Integer integer) {
+        return bookRepository.findById(integer).orElse(null);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class BookService implements IBookService{
     }
 
     @Override
-    public void delete(Long bookID) {
+    public void delete(Integer bookID) {
         bookRepository.deleteById(bookID);
     }
 

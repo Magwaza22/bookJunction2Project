@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+
 @Entity
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appointment_id")
-    private Long appointmentId;  // Changed from String to Long
+    private int appointmentId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,7 +35,7 @@ public class Appointment {
         this.location = builder.location;
     }
 
-    public Long getAppointmentId() {  // Changed return type from String to Long
+    public int getAppointmentId() {
         return appointmentId;
     }
 
@@ -59,7 +60,7 @@ public class Appointment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Appointment that = (Appointment) o;
-        return Objects.equals(appointmentId, that.appointmentId) &&
+        return appointmentId == that.appointmentId &&
                 Objects.equals(user, that.user) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(dateTime, that.dateTime) &&
@@ -83,13 +84,13 @@ public class Appointment {
     }
 
     public static class Builder {
-        private Long appointmentId;  // Changed from String to Long
+        private int appointmentId;
         private User user;
         private String description;
         private LocalDateTime dateTime;
         private Location location;
 
-        public Builder setAppointmentId(Long appointmentId) {  // Changed parameter type from String to Long
+        public Builder setAppointmentId(int appointmentId) {
             this.appointmentId = appointmentId;
             return this;
         }

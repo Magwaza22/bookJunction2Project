@@ -2,7 +2,7 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.domain.Admin;
+import za.ac.cput.domain.Admin; // Assuming there's an Admin class
 import za.ac.cput.repository.AdminRepository;
 
 import java.util.List;
@@ -22,8 +22,8 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public Admin read(Long adminID) {
-        return adminRepository.findById(String.valueOf(adminID)).orElse(null);
+    public Admin read(Integer adminID) {
+        return adminRepository.findById(adminID).orElse(null);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public void delete(Long adminID) {
-        adminRepository.deleteById(String.valueOf(adminID));
+    public void delete(Integer adminID) {
+        adminRepository.deleteById(adminID);
     }
 }

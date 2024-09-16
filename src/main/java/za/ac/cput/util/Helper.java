@@ -12,7 +12,7 @@ public class Helper {
         return false;
     }
 
-    public static String generatedID() {
+    public static String generatedID(String s) {
         return UUID.randomUUID().toString();
     }
 

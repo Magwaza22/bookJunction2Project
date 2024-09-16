@@ -1,9 +1,5 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.*;
-import za.ac.cput.util.Helper;
-import java.time.LocalDateTime;
-
 import za.ac.cput.domain.Appointment;
 import za.ac.cput.domain.Location;
 import za.ac.cput.domain.User;

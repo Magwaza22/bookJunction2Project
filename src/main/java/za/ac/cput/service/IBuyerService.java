@@ -4,10 +4,11 @@ import za.ac.cput.domain.Buyer;
 
 import java.util.List;
 
-public interface IBuyerService extends IService<Buyer, Long> {
+public interface IBuyerService extends IService<Buyer, Integer> {
     Buyer create(Buyer buyer);
-    Buyer read(Long buyerID);
+    Buyer read(Integer buyerID);
     Buyer update(Buyer buyer);
     List<Buyer> getAll();
-    void delete(Long buyerID);
+    void delete(Integer buyerID);
+
 }

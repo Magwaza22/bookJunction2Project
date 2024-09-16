@@ -27,7 +27,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Admin> getAdmin(@PathVariable Long id) {
+    public ResponseEntity<Admin> getAdmin(@PathVariable Integer id) {
         Admin admin = adminService.read(id);
         return admin != null ? ResponseEntity.ok(admin) : ResponseEntity.notFound().build();
     }
@@ -45,7 +45,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAdmin(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAdmin(@PathVariable Integer id) {
         adminService.delete(id);
         return ResponseEntity.noContent().build();
     }

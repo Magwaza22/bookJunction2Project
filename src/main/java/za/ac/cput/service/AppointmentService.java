@@ -1,7 +1,6 @@
 package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Appointment;
 import za.ac.cput.repository.AppointmentRepository;
@@ -25,12 +24,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public Appointment read(String s) {
-        return null;
-    }
-
-    @Override
-    public Appointment read(Long appointmentId) {
+    public Appointment read(Integer appointmentId) {
         return repository.findById(appointmentId)
                 .orElseThrow(() -> new NoSuchElementException("Appointment not found with id: " + appointmentId));
     }
@@ -42,23 +36,18 @@ public class AppointmentService implements IAppointmentService {
         }
         return repository.save(appointment);
     }
-    @Autowired
-    private AppointmentRepository appointmentRepository;
+
     @Override
-
-        public void delete(Long appointmentId) {
-            if (appointmentRepository.existsById(appointmentId)) {
-                appointmentRepository.deleteById(appointmentId);
-            } else {
-                throw new NoSuchElementException("Appointment not found.");
-            }
+    public void delete(Integer appointmentId) {
+        if (repository.existsById(appointmentId)) {
+            repository.deleteById(appointmentId);
+        } else {
+            throw new NoSuchElementException("Appointment not found with id: " + appointmentId);
         }
-     @Override
-
-    public List<Appointment> getall() {
-        return appointmentRepository.findAll();
     }
 
+    @Override
     public List<Appointment> getAll() {
-        return null;
-    }}
+        return repository.findAll();
+    }
+}
