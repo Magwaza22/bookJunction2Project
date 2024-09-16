@@ -1,103 +1,109 @@
 package za.ac.cput.controller;
 
-import za.ac.cput.domain.Admin;
-import za.ac.cput.service.AdminService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import za.ac.cput.domain.Admin;
+import za.ac.cput.repository.AdminRepository;
+import za.ac.cput.service.AdminService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@SpringBootTest
+@AutoConfigureMockMvc
 class AdminControllerTest {
 
-    @Mock
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
     private AdminService adminService;
 
-    @InjectMocks
-    private AdminController adminController;
+    @Autowired
+    private AdminRepository adminRepository;
 
     private Admin admin;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        adminRepository.deleteAll(); // Clear the database before each test
         admin = new Admin.Builder()
-                .setAdminID(1L)
+                .setAdminID(1)
                 .setName("John Doe")
                 .setEmail("john@example.com")
                 .setPassword("securePassword")
                 .setPhoneNumber("1234567890")
                 .build();
+        adminService.create(admin); // Save the admin to the database
     }
 
     @Test
-    void testCreateAdmin() {
-        when(adminService.create(any(Admin.class))).thenReturn(admin);
+    void testCreateAdmin() throws Exception {
+        Admin newAdmin = new Admin.Builder()
+                .setAdminID(2)
+                .setName("Jane Smith")
+                .setEmail("jane@example.com")
+                .setPassword("anotherPassword")
+                .setPhoneNumber("0987654321")
+                .build();
 
-        ResponseEntity<Admin> response = adminController.createAdmin(admin);
-
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(admin, response.getBody());
+        mockMvc.perform(post("/admin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(newAdmin)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.adminID").value(newAdmin.getAdminID()))
+                .andExpect(jsonPath("$.name").value(newAdmin.getName()));
     }
 
     @Test
-    void testGetAdmin() {
-        when(adminService.read(1L)).thenReturn(admin);
-
-        ResponseEntity<Admin> response = adminController.getAdmin(1L);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(admin, response.getBody());
+    void testGetAdmin() throws Exception {
+        mockMvc.perform(get("/admin/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.adminID").value(admin.getAdminID()))
+                .andExpect(jsonPath("$.name").value(admin.getName()));
     }
 
     @Test
-    void testGetAdmin_NotFound() {
-        when(adminService.read(2L)).thenReturn(null);
-
-        ResponseEntity<Admin> response = adminController.getAdmin(2L);
-
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    void testGetAdmin_NotFound() throws Exception {
+        mockMvc.perform(get("/admin/999"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
-    void testUpdateAdmin() {
-        when(adminService.update(any(Admin.class))).thenReturn(admin);
+    void testUpdateAdmin() throws Exception {
+        admin.setName("John Updated"); // Update the name for testing
 
-        ResponseEntity<Admin> response = adminController.updateAdmin(admin);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(admin, response.getBody());
+        mockMvc.perform(put("/admin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(admin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("John Updated"));
     }
 
     @Test
-    void testGetAllAdmins() {
-        List<Admin> adminList = new ArrayList<>();
-        adminList.add(admin);
-        when(adminService.getAll()).thenReturn(adminList);
-
-        ResponseEntity<List<Admin>> response = adminController.getAllAdmins();
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(1, response.getBody().size());
+    void testGetAllAdmins() throws Exception {
+        mockMvc.perform(get("/admin"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].adminID").value(admin.getAdminID()));
     }
 
     @Test
-    void testDeleteAdmin() {
-        doNothing().when(adminService).delete(1L);
+    void testDeleteAdmin() throws Exception {
+        mockMvc.perform(delete("/admin/1"))
+                .andExpect(status().isNoContent());
 
-        ResponseEntity<Void> response = adminController.deleteAdmin(1L);
-
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-        verify(adminService, times(1)).delete(1L);
+        mockMvc.perform(get("/admin/1"))
+                .andExpect(status().isNotFound());
     }
 }

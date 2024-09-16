@@ -4,8 +4,9 @@ import za.ac.cput.domain.User;
 
 import java.util.List;
 
-public interface IUserService extends IService<User, String> {
+public interface IUserService extends IService<User, Integer> {
     List<User> getAll();
 
-    void delete(String userId);
+
+    void delete(Integer userId);
 }

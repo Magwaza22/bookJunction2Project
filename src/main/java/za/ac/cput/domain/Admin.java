@@ -76,6 +76,11 @@ public class Admin {
             '}';
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
   // Builder pattern implementation
   public static class Builder {
     private Integer adminID;  // Change from Long to Integer
