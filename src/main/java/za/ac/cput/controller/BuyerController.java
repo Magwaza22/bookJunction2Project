@@ -27,7 +27,7 @@ public class BuyerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Buyer> getBuyer(@PathVariable Long id) {
+    public ResponseEntity<Buyer> getBuyer(@PathVariable Integer id) {
         Buyer buyer = buyerService.read(id);
         return buyer != null ? ResponseEntity.ok(buyer) : ResponseEntity.notFound().build();
     }
@@ -45,7 +45,7 @@ public class BuyerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBuyer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBuyer(@PathVariable Integer id) {
         buyerService.delete(id);
         return ResponseEntity.noContent().build();
     }

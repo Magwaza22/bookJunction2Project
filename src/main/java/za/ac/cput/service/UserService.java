@@ -23,7 +23,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User read(String userId) {
+    public User read(Integer userId) {
         return userRepository.findById(userId).orElse(null);
     }
 
@@ -38,7 +38,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void delete(String userId) {
+    public void delete(Integer userId) {
         userRepository.deleteById(userId);
     }
 }

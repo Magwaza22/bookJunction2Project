@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Buyer;
 
 @Repository
-public interface BuyerRepository extends JpaRepository<Buyer, String> {
+public interface BuyerRepository extends JpaRepository<Buyer, Integer> {
 
 
 }
