@@ -50,10 +50,10 @@ class OrderServiceTest {
         book1 = new Book.Builder().setBookID(1L).setBookPhoto(bookPhoto).setISBN("87234").setTitle("Avengers: Endgame").setEdition("2nd Edition").setAuthor(author1).setPrice(2700.00).build();
         bookService.create(book1);
 
-        seller1 = (Seller) new Seller.Builder().setUserId("lucky123").setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
+        seller1 = (Seller) new Seller.Builder().setUserId("1").setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
         sellerService.create(seller1);
 
-        buyer1 = (Buyer) new Buyer.Builder().setUserId("zisanda123").setName("Zisanda").setEmail("zish@gmail.com").setPhoneNumber("0798765897").build();
+        buyer1 = (Buyer) new Buyer.Builder().setUserId("2").setName("Zisanda").setEmail("zish@gmail.com").setPhoneNumber("0798765897").build();
         buyerService.create(buyer1);
 
         Set<TransactionHistory> transactionHistories = new HashSet<>();

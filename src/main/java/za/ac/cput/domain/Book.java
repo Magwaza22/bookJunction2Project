@@ -68,34 +68,28 @@ public class Book implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Book book)) return false;
-        return Objects.equals(getBookID(), book.getBookID()) &&
-                Arrays.equals(getBookPhoto(), book.getBookPhoto()) &&
-                Objects.equals(getISBN(), book.getISBN()) &&
-                Objects.equals(getTitle(), book.getTitle()) &&
-                Objects.equals(getEdition(), book.getEdition()) &&
-                Objects.equals(getAuthor(), book.getAuthor()) &&
-                Objects.equals(getPrice(), book.getPrice());
+        return Objects.equals(getBookID(), book.getBookID()) && Arrays.equals(getBookPhoto(), book.getBookPhoto()) && Objects.equals(getISBN(), book.getISBN()) && Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getPrice(), book.getPrice());
     }
 
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(getBookID(), getISBN(), getTitle(), getEdition(), getAuthor(), getPrice());
-        result = 31 * result + Arrays.hashCode(getBookPhoto());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "bookID=" + bookID +
-                ", bookPhoto=" + Arrays.toString(bookPhoto) +
-                ", ISBN='" + ISBN + '\'' +
-                ", title='" + title + '\'' +
-                ", edition='" + edition + '\'' +
-                ", author=" + author +
-                ", price=" + price +
-                '}';
-    }
+//    @Override
+//    public int hashCode() {
+//        int result = Objects.hash(getBookID(), getISBN(), getTitle(), getEdition(), getAuthor(), getPrice());
+//        result = 31 * result + Arrays.hashCode(getBookPhoto());
+//        return result;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Book{" +
+//                "bookID=" + bookID +
+//                ", bookPhoto=" + Arrays.toString(bookPhoto) +
+//                ", ISBN='" + ISBN + '\'' +
+//                ", title='" + title + '\'' +
+//                ", edition='" + edition + '\'' +
+//                ", author=" + author +
+//                ", price=" + price +
+//                '}';
+//    }
 
     public static class Builder {
         private int bookID;

@@ -59,7 +59,6 @@ public class Buyer extends User {
             }
             return this;
         }
-
         public Buyer build() {
             return new Buyer(this);
         }
