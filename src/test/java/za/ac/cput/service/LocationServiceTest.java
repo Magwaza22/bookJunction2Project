@@ -13,10 +13,9 @@ import java.util.Optional;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class LocationServiceTest {
+class LocationServiceTest {
 
     @Mock
     private LocationRepository locationRepository;
@@ -24,87 +23,85 @@ public class LocationServiceTest {
     @InjectMocks
     private LocationService locationService;
 
+    private Location location;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        location = new Location.Builder()
+                .setAddress("143 Sir Lowry Rd")
+                .build();
     }
 
     @Test
-    void saveLocation_ValidLocation_Success() {
-        // Arrange
-        Location location = new Location.Builder().setAddress("123 Main St").build();
-        when(locationRepository.save(any(Location.class))).thenReturn(location);
+    void update() {
+        when(locationRepository.existsById(location.getId())).thenReturn(true);
+        when(locationRepository.save(location)).thenReturn(location);
 
+        Location updatedLocation = locationService.update(location);
 
-        Location savedLocation = locationService.saveLocation(location);
-
-
-        assertNotNull(savedLocation, "Saved location should not be null.");
-        assertEquals(location.getAddress(), savedLocation.getAddress(), "Addresses should match.");
+        assertNotNull(updatedLocation);
+        assertEquals(location.getId(), updatedLocation.getId());
+        verify(locationRepository, times(1)).existsById(location.getId());
         verify(locationRepository, times(1)).save(location);
     }
 
     @Test
-    void saveLocation_NullLocation_ThrowsException() {
+    void update_NotFound() {
+        when(locationRepository.existsById(location.getId())).thenReturn(false);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            locationService.saveLocation(null);
-        }, "Location cannot be null");
+        Exception exception = assertThrows(NoSuchElementException.class, () -> {
+            locationService.update(location);
+        });
+
+        assertEquals("Location not found with id: " + location.getId(), exception.getMessage());
+        verify(locationRepository, times(1)).existsById(location.getId());
+        verify(locationRepository, times(0)).save(location);
     }
 
     @Test
-    void getLocationById_ValidId_ReturnsLocation() {
+    void read() {
+        when(locationRepository.findById(location.getId())).thenReturn(Optional.of(location));
 
-        Long locationId = 1L;
-        Location location = new Location.Builder().setAddress("456 Elm St").build();
-        when(locationRepository.findById(locationId)).thenReturn(Optional.of(location));
+        Location foundLocation = locationService.read(location.getId());
 
-
-        Location foundLocation = locationService.getLocationById(locationId);
-
-
-        assertNotNull(foundLocation, "Location should not be null.");
-        assertEquals(location.getAddress(), foundLocation.getAddress(), "Addresses should match.");
-        verify(locationRepository, times(1)).findById(locationId);
+        assertNotNull(foundLocation);
+        assertEquals(location.getId(), foundLocation.getId());
+        verify(locationRepository, times(1)).findById(location.getId());
     }
 
     @Test
-    void getLocationById_InvalidId_ThrowsException() {
+    void read_NotFound() {
+        when(locationRepository.findById(location.getId())).thenReturn(Optional.empty());
 
-        Long locationId = 1L;
-        when(locationRepository.findById(locationId)).thenReturn(Optional.empty());
+        Exception exception = assertThrows(NoSuchElementException.class, () -> {
+            locationService.read(location.getId());
+        });
 
-
-        assertThrows(NoSuchElementException.class, () -> {
-            locationService.getLocationById(locationId);
-        }, "No location found with ID: " + locationId);
-        verify(locationRepository, times(1)).findById(locationId);
+        assertEquals("Location not found with id: " + location.getId(), exception.getMessage());
+        verify(locationRepository, times(1)).findById(location.getId());
     }
 
     @Test
-    void deleteLocation_ValidId_Success() {
+    void delete() {
+        when(locationRepository.existsById(location.getId())).thenReturn(true);
 
-        Long locationId = 1L;
-        when(locationRepository.existsById(locationId)).thenReturn(true);
-        doNothing().when(locationRepository).deleteById(locationId);
+        locationService.delete(location.getId());
 
-
-        locationService.deleteLocation(locationId);
-
-
-        verify(locationRepository, times(1)).deleteById(locationId);
+        verify(locationRepository, times(1)).existsById(location.getId());
+        verify(locationRepository, times(1)).deleteById(location.getId());
     }
 
     @Test
-    void deleteLocation_InvalidId_ThrowsException() {
+    void delete_NotFound() {
+        when(locationRepository.existsById(location.getId())).thenReturn(false);
 
-        Long locationId = 1L;
-        when(locationRepository.existsById(locationId)).thenReturn(false);
+        Exception exception = assertThrows(NoSuchElementException.class, () -> {
+            locationService.delete(location.getId());
+        });
 
-
-        assertThrows(NoSuchElementException.class, () -> {
-            locationService.deleteLocation(locationId);
-        }, "No location found with ID: " + locationId);
-        verify(locationRepository, never()).deleteById(locationId);
+        assertEquals("Location not found with id: " + location.getId(), exception.getMessage());
+        verify(locationRepository, times(1)).existsById(location.getId());
+        verify(locationRepository, times(0)).deleteById(location.getId());
     }
 }
