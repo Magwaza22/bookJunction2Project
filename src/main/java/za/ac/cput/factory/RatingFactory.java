@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public class RatingFactory {
 
-    public static Rating rateBuild(Long id, int overAllRating, int bookConditionRating, int sellerReliabilityRating, int valueRating, int deliveryRating, int accuracyOfRating, LocalDate date, User user){
-        if (Helper.isNullOrEmpty(String.valueOf(id))
+    public static Rating rateBuild(String id, int overAllRating, int bookConditionRating, int sellerReliabilityRating, int valueRating, int deliveryRating, int accuracyOfRating, LocalDate date, User user){
+        if (Helper.isNullOrEmpty(id)
                 ||Helper.assertInRange(overAllRating) ||
                 Helper.assertInRange(bookConditionRating) ||
                 Helper.assertInRange(sellerReliabilityRating) ||
