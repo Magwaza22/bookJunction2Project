@@ -20,7 +20,7 @@ public class TransactionHistoryFactory {
         }
 
         return new TransactionHistory.Builder()
-                .setTransaction_id(transactionId)
+                .setTransactionID(transactionId)
                 .setBook_id(book)
                 .setBuyer(buyer)
                 .setSeller(seller)
