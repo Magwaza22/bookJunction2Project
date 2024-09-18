@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Rating {
     @Id
-    private Long id;
+    private String id;
     private int overAllRating;
     private int bookConditionRating;
     private int sellerReliabilityRating;
@@ -34,7 +34,7 @@ public class Rating {
 
     }
 
-    public Long getId() {return id;}
+    public String getId() {return id;}
 
     public int getOverAllRating() {
         return overAllRating;
@@ -91,7 +91,7 @@ public class Rating {
     }
 
     public static class Builder{
-        private Long id;
+        private String id;
         private int overAllRating;
         private int bookConditionRating;
         private int sellerReliabilityRating;
@@ -101,7 +101,7 @@ public class Rating {
         private LocalDate date;
         private User user;
 
-        public Builder setId(Long id) {
+        public Builder setId(String id) {
             this.id = id;
             return this;
         }

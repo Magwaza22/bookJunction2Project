@@ -7,7 +7,7 @@ import za.ac.cput.domain.User;
 import java.util.List;
 
 @Service
-public interface IRatingService extends IService<Rating, Long>{
+public interface IRatingService extends IService<Rating, String>{
 
     List getAll(Rating id);
 

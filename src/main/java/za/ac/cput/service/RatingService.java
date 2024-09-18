@@ -23,7 +23,7 @@ public class RatingService implements IRatingService{
     }
 
     @Override
-    public Rating read(Long id) {
+    public Rating read(String id) {
 
         Optional<Rating> rating = rrepo.findById(id);
         return rating.orElse(null);
