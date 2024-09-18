@@ -9,6 +9,7 @@ public class Listing {
     private int listingID;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bookID")
    private Book book;
 
     @ManyToOne
@@ -77,20 +78,24 @@ public class Listing {
             this.listingID = listingID;
         }
 
-        public void setBook(Book book) {
+        public Builder setBook(Book book) {
             this.book = book;
+            return this;
         }
 
-        public void setUser(User user) {
+        public Builder setUser(User user) {
             this.user = user;
+            return this;
         }
 
-        public void setDateListed(LocalDate dateListed) {
+        public Builder setDateListed(LocalDate dateListed) {
             this.dateListed = dateListed;
+            return this;
         }
 
-        public void setStatus(String status) {
+        public Builder setStatus(String status) {
             this.status = status;
+            return this;
         }
 
         public Listing.Builder copy(Listing l) {
