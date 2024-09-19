@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RatingFactoryTest {
 
-    private String id;
+    private int id;
     private int overAllRating;
     private int bookConditionRating;
     private int sellerReliabilityRating;
@@ -30,8 +30,8 @@ class RatingFactoryTest {
 
     @BeforeEach
     void setUp() {
-        rate1 = RatingFactory.rateBuild("", 4,5,4,3,3,4, LocalDate.of(2023, 2, 1), user1);
-        rate2 = RatingFactory.rateBuild("D03", 5, 4, 3, 6, 6, 7, LocalDate.of(2024, 5, 18), user2);
+        rate1 = RatingFactory.rateBuild(1, 4,5,4,3,3,4, LocalDate.of(2023, 2, 1), user1);
+        rate2 = RatingFactory.rateBuild(3, 5, 4, 3, 6, 6, 7, LocalDate.of(2024, 5, 18), user2);
     }
 
     @Test

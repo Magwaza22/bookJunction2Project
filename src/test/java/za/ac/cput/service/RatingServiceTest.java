@@ -29,10 +29,10 @@ class RatingServiceTest {
         User user1 = UserFactory.createUser(1, "John Doe", "john.doe@example.com", "1234567890");
         User user2 = UserFactory.createUser(2, "Vuyi", "vuyi@example.com", "0987654321");
 
-        rate1 = RatingFactory.rateBuild("A01", 4, 3, 2, 4, 3, 2, LocalDate.of(2023, 2, 1), user1);
+        rate1 = RatingFactory.rateBuild(5, 4, 3, 2, 4, 3, 2, LocalDate.of(2023, 2, 1), user1);
         System.out.println(rate1);
 
-        rate2 = RatingFactory.rateBuild("A02", 3, 4, 5, 4, 5, 6, LocalDate.of(2023, 4, 18), user2);
+        rate2 = RatingFactory.rateBuild(6, 3, 4, 5, 4, 5, 6, LocalDate.of(2023, 4, 18), user2);
         System.out.println(rate2);
 
         rs = new RatingService(); 
