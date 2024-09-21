@@ -26,8 +26,8 @@ class RatingServiceTest {
     @Order(1)
     void a_setUp() {
 
-        User user1 = UserFactory.createUser(1, "John Doe", "john.doe@example.com", "1234567890");
-        User user2 = UserFactory.createUser(2, "Vuyi", "vuyi@example.com", "0987654321");
+        User user1 = UserFactory.createUser(1, "Natasha Mavuso", "nat366@gmail.com", "0824379664");
+        User user2 = UserFactory.createUser(2, "Giveon Barrack Smith", "gvb09@gmail.com", "0652086493");
 
         rate1 = RatingFactory.rateBuild(5, 4, 3, 2, 4, 3, 2, LocalDate.of(2023, 2, 1), user1);
         System.out.println(rate1);
