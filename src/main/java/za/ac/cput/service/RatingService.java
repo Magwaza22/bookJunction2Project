@@ -23,12 +23,11 @@ public class RatingService implements IRatingService{
     }
 
     @Override
-    public Rating read(String id) {
-
+    public Rating read(Integer id) {
         Optional<Rating> rating = rrepo.findById(id);
         return rating.orElse(null);
-    }
 
+    }
 
     @Override
     public Rating update(Rating rating) {
