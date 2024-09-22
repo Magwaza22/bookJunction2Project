@@ -28,7 +28,7 @@ public class RatingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Rating> getRating(@PathVariable String id) {
-        Rating rating = ratingService.read(id);
+        Rating rating = ratingService.read(Integer.valueOf(id));
         return rating != null ? ResponseEntity.ok(rating) : ResponseEntity.notFound().build();
     }
 
