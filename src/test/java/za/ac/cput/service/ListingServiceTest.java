@@ -80,7 +80,6 @@ class ListingServiceTest {
     }
     @Test
     void delete() {
-        // Delete the listing
         listingService.delete(testListing.getListingID());
 
     }

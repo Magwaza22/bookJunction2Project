@@ -37,7 +37,6 @@ class TransactionHistoryFactoryTest {
                 .setEmail("john@example.com")
                 .setPhoneNumber("1234567890")
                 .build();
-
         LocalDate date = LocalDate.of(2018, 1, 1);
 
         TransactionHistory transactionHistory = TransactionHistoryFactory.createTransactionHistory(transactionID, book, user, date );

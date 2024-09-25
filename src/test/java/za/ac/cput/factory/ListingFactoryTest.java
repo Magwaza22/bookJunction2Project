@@ -60,7 +60,6 @@ public class ListingFactoryTest {
                 .setAuthor(author)
                 .setPrice(49.99)
                 .build();
-
         User user = new User.UserBuilder()
                 .setUserId(123)
                 .setName("")
