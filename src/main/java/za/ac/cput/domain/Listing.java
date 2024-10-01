@@ -3,24 +3,29 @@ package za.ac.cput.domain;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
+
 @Entity
 public class Listing {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int listingID;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bookID")
-   private Book book;
+    private Book book;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user; // Seller
 
     private LocalDate dateListed;
+
     private String status;
-    public Listing(){
+
+    public Listing() {
     }
-    private Listing(Builder builder){
+
+    protected Listing(Builder builder) {
         this.listingID = builder.listingID;
         this.book = builder.book;
         this.user = builder.user;
@@ -28,17 +33,22 @@ public class Listing {
         this.status = builder.status;
     }
 
+
     public int getListingID() {
         return listingID;
     }
 
-    public Book getBook() {return book;}
+    public Book getBook() {
+        return book;
+    }
 
     public LocalDate getDateListed() {
         return dateListed;
     }
 
-    public User getUser() {return user;}
+    public User getUser() {
+        return user;
+    }
 
     public String getStatus() {
         return status;
@@ -67,6 +77,7 @@ public class Listing {
                 '}';
     }
 
+    // Builder class
     public static class Builder {
         private int listingID;
         private Book book;
@@ -74,8 +85,9 @@ public class Listing {
         private LocalDate dateListed;
         private String status;
 
-        public void setListingID(int listingID) {
+        public Builder setListingID(int listingID) {
             this.listingID = listingID;
+            return this;
         }
 
         public Builder setBook(Book book) {
@@ -98,14 +110,17 @@ public class Listing {
             return this;
         }
 
-        public Listing.Builder copy(Listing l) {
+
+        public Builder copy(Listing l) {
             this.listingID = l.listingID;
             this.book = l.book;
             this.user = l.user;
             this.dateListed = l.dateListed;
             this.status = l.status;
-            return this ;
+            return this;
         }
+
+        // Build method
         public Listing build() {
             return new Listing(this);
         }

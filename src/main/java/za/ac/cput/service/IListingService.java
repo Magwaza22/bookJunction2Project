@@ -4,11 +4,13 @@ import za.ac.cput.domain.Listing;
 
 import java.util.List;
 
-public interface IListingService extends IService<Listing, String>{
-    void delete(String listingID);
+public interface IListingService <Listing,Integer >{
 
-    List<Listing> getall();
+    za.ac.cput.domain.Listing read(java.lang.Integer integer);
 
-    List<Listing> getAllListings();
-    void deleteListing(int listingID);
+    za.ac.cput.domain.Listing update(za.ac.cput.domain.Listing listing);
+
+    void delete(java.lang.Integer listingID);
+
+    List<za.ac.cput.domain.Listing> getall();
 }

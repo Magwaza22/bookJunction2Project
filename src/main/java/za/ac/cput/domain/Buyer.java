@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 public class Buyer extends User {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private Set<TransactionHistory> buyingHistory;
 
     public Buyer() {

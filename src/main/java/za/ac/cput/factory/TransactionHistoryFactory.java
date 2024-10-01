@@ -17,11 +17,9 @@ public class TransactionHistoryFactory {
 
         return new TransactionHistory.Builder()
                 .setTransactionID(transactionID)
-                .setBook(book)
-                .setBuyer(user)
+                .setBookID(book)
+                .setUser(user)
                 .setDate(date)
                 .build();
     }
-
-
 }

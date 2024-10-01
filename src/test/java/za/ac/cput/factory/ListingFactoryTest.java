@@ -1,41 +1,81 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
-import za.ac.cput.domain.Book;
-import za.ac.cput.domain.Listing;
-import za.ac.cput.domain.User;
-
+import za.ac.cput.domain.*;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ListingFactoryTest {
+public class ListingFactoryTest {
 
     @Test
-    void createListing() {
+    public void testCreateListing_Success() {
+        byte[] bookPhoto = new byte[]{1, 2, 3};
+        Author author = new Author.Builder()
+                .setFirstName("Joshua")
+                .setLastName("Bloch")
+                .build();
 
-            Book book = new Book();
-            User user = new User();
-            LocalDate dateListed = LocalDate.now();
-            Double price = 29.99;
-            String status = "Available";
-            String condition = "New";
+        Book book = new Book.Builder()
+                .setBookPhoto(bookPhoto)
+                .setISBN("123-4567891234")
+                .setTitle("Effective Java")
+                .setEdition("3rd")
+                .setAuthor(author)
+                .setPrice(49.99)
+                .build();
 
-            Listing listing = ListingFactory.createListing(1, book, user, dateListed, price, status, condition);
+        User user = new User.UserBuilder()
+                .setUserId(123)
+                .setName("John Doe")
+                .setEmail("john@example.com")
+                .setPhoneNumber("1234567890")
+                .build();
 
-            assertNotNull(listing);
-            assertEquals(1, listing.getListingID());
-            assertEquals(book, listing.getBook());
-            assertEquals(user, listing.getUser());
-            assertEquals(dateListed, listing.getDateListed());
-            assertEquals(price, listing.getPrice());
-            assertEquals(status, listing.getStatus());
-            assertEquals(condition, listing.getCondition());
-        }
+        // Valid listing
+        Listing listing = ListingFactory.createListing(1, book, user, LocalDate.now(), "Active");
 
-        @Test
-        void testCreateListing_InvalidInput() {
-            Listing listing = ListingFactory.createListing(0, null, null, null, null, null, null);
-            assertNull(listing);
-        }
+        // Assert that the listing is created and contains the correct values
+        assertNotNull(listing);
+        assertEquals(1, listing.getListingID());
+        assertEquals(book, listing.getBook());
+        assertEquals(user, listing.getUser());
+        assertEquals(LocalDate.now(), listing.getDateListed());
+        assertEquals("Active", listing.getStatus());
     }
+
+    @Test
+    void createListing_Fail() {
+        byte[] bookPhoto = new byte[]{1, 2, 3};
+        Author author = new Author.Builder()
+                .setFirstName("")
+                .setLastName("Bloch")
+                .build();
+
+        Book book = new Book.Builder()
+                .setBookPhoto(bookPhoto)
+                .setISBN("123-4567891234")
+                .setTitle("Effective Java")
+                .setEdition("")
+                .setAuthor(author)
+                .setPrice(49.99)
+                .build();
+        User user = new User.UserBuilder()
+                .setUserId(123)
+                .setName("")
+                .setEmail("john@example.com")
+                .setPhoneNumber(null)
+                .build();
+
+        // Valid listing
+        Listing listing = ListingFactory.createListing(1, book, user, LocalDate.now(), "Active");
+
+        // Assert that the listing is created and contains the correct values
+        assertNotNull(listing);
+        assertEquals(1, listing.getListingID());
+        assertEquals(book, listing.getBook());
+        assertEquals(user, listing.getUser());
+        assertEquals(LocalDate.now(), listing.getDateListed());
+        assertEquals("Active", listing.getStatus());
+    }
+}

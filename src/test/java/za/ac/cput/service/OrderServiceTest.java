@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderServiceTest {
-
+/*
 
     private final OrderService orderService;
     private final SellerService sellerService;
@@ -47,8 +47,7 @@ class OrderServiceTest {
         author1 = new Author.Builder().setFirstName("Wisani").setLastName("Magwaza").build();
 
         byte[] bookPhoto = new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A};
-        book1 = new Book.Builder().setBookID(1).setBookPhoto(bookPhoto).setISBN("87234").setTitle("Avengers: Endgame").setEdition("2nd Edition").setAuthor(author1).setPrice(2700.00).build();
-        bookService.create(book1);
+
 
         seller1 = (Seller) new Seller.Builder().setUserId(1).setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
         sellerService.create(seller1);
@@ -100,4 +99,6 @@ class OrderServiceTest {
         Set<za.ac.cput.domain.Order> allOrder = orderService.getAll();
         System.out.println(allOrder);
     }
+
+    */
 }

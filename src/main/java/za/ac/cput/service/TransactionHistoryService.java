@@ -2,8 +2,11 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.domain.Book;
 import za.ac.cput.domain.TransactionHistory;
 import za.ac.cput.repository.TransactionHistoryRepository;
+
+import java.util.List;
 
 @Service
 public class TransactionHistoryService implements ITransactionHistoryService{
@@ -17,7 +20,7 @@ public class TransactionHistoryService implements ITransactionHistoryService{
     }
 
     @Override
-    public TransactionHistory read(String s) {
+    public TransactionHistory read(Integer integer) {
         return null;
     }
 
@@ -26,6 +29,7 @@ public class TransactionHistoryService implements ITransactionHistoryService{
         return null;
     }
     }
+
 
 
 

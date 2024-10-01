@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 public class Seller extends User{
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private Set<TransactionHistory> inventory;
 
     public Seller() {

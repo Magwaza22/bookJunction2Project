@@ -13,29 +13,18 @@ public class ListingService implements IListingService {
     ListingService(ListingRepository listingRepository) {this.listingRepository = listingRepository;}
 
     @Override
-    public Listing create(Listing listing) {return listingRepository.save(listing);}
-
-    @Override
-    public Listing read(String string){return listingRepository.findById(string).orElse(null);}
+    public Listing read(Integer integer){return listingRepository.findById(integer).orElse(null);}
 
     @Override
     public Listing update(Listing listing) {return listingRepository.save(listing);}
 
 
     @Override
-    public void delete(String listingID){listingRepository.deleteById(listingID);}
+    public void delete(Integer listingID){listingRepository.deleteById(listingID);}
 
     @Override
     public List<Listing> getall(){return listingRepository.findAll();}
 
-    @Override
-    public List<Listing> getAllListings() {
-        return List.of();
-    }
 
-    @Override
-    public void deleteListing(int listingID) {
-
-    }
 
 }
