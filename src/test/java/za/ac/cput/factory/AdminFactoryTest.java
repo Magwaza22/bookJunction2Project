@@ -9,7 +9,7 @@ class AdminFactoryTest {
 
     @Test
     void testCreateAdmin_ValidInputs() {
-        Long adminID = 1;
+        Integer adminID = Math.toIntExact(Long.valueOf(1));
         String name = "John Doe";
         String email = "john@example.com";
         String password = "securePassword";
