@@ -22,21 +22,21 @@ private final NotificationRepository notificationRepository;
 
     @Override
     public List<Notification> getall() {
-        return null;
+        return notificationRepository.findAll();
     }
 
     @Override
     public Notification create(Notification notification) {
-        return null;
+        return notificationRepository.save(notification);
     }
 
     @Override
     public Notification read(Integer integer) {
-        return null;
+        return notificationRepository.findById(integer).orElse(null);
     }
 
     @Override
     public Notification update(Notification notification) {
-        return null;
+        return notificationRepository.save(notification) ;
     }
 }
