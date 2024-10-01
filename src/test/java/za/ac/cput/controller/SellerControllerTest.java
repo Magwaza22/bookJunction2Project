@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 class SellerControllerTest {
     @Test
     public void testCreateOrderSuccess() {
-        User user = new User.UserBuilder().setUserId("12345").build();
+        User user = new User.UserBuilder().setUserId(Integer.valueOf("12345")).build();
         LocalDate orderDate = LocalDate.now();
         Order order = OrderFactory.createOrder(1, user, orderDate, 100.0, "Pending");
 
@@ -41,7 +41,7 @@ class SellerControllerTest {
 
     @Test
     public void testCreateOrderNullOrderStatus() {
-        User user = new User.UserBuilder().setUserId("12345").build();
+        User user = new User.UserBuilder().setUserId(Integer.valueOf("12345")).build();
         LocalDate orderDate = LocalDate.now();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
