@@ -15,14 +15,11 @@ public class ListingController {
     @Autowired
     ListingController(ListingService service) { this.service = service; }
 
-    @PostMapping("/save")
-    public Listing save(@RequestBody Listing listing){return service.create(listing);}
-
    @GetMapping(value = "read/{id}")
-    public Listing read(@PathVariable String id){return service.read(id);}
+    public Listing read(@PathVariable Integer id){return service.read(Integer.valueOf(id));}
 
     @DeleteMapping("/deletebyid/{id}")
-    public void delete(@PathVariable String id){service.delete(id);}
+    public void delete(@PathVariable Integer id){service.delete(Integer.valueOf(id));}
 
     @GetMapping("/getall")
     public List<Listing> getAll(){return service.getall();}
