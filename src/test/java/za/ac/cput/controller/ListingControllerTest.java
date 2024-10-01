@@ -56,6 +56,7 @@ class ListingControllerTest {
                 .setDateListed(LocalDate.now())
                 .setStatus("Active")
                 .build();
+        listingController.save(listing);
     }
         @Test void read() {
             // Send a GET request to read the listing by ID
