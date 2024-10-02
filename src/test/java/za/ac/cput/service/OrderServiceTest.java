@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderServiceTest {
-/*
+
 
     private final OrderService orderService;
     private final SellerService sellerService;
@@ -100,5 +100,5 @@ class OrderServiceTest {
         System.out.println(allOrder);
     }
 
-    */
+
 }
