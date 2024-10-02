@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderServiceTest {
-/*
+
 
     private final OrderService orderService;
     private final SellerService sellerService;
@@ -47,17 +47,16 @@ class OrderServiceTest {
         author1 = new Author.Builder().setFirstName("Wisani").setLastName("Magwaza").build();
 
         byte[] bookPhoto = new byte[] {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A};
-        book1 = new Book.Builder().setBookID().setBookPhoto(bookPhoto).setISBN("87234").setTitle("Avengers: Endgame").setEdition("2nd Edition").setAuthor(author1).setPrice(2700.00).build();
-        bookService.create(book1);
 
-        seller1 = (Seller) new Seller.Builder().setUserId("1").setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
+
+        seller1 = (Seller) new Seller.Builder().setUserId(1).setName("Lucky").setEmail("lucky@gmail.com").setPhoneNumber("0657897689").build();
         sellerService.create(seller1);
 
-        buyer1 = (Buyer) new Buyer.Builder().setUserId("2").setName("Zisanda").setEmail("zish@gmail.com").setPhoneNumber("0798765897").build();
+        buyer1 = (Buyer) new Buyer.Builder().setUserId(2).setName("Zisanda").setEmail("zish@gmail.com").setPhoneNumber("0798765897").build();
         buyerService.create(buyer1);
 
         Set<TransactionHistory> transactionHistories = new HashSet<>();
-        TransactionHistory transactionHistory = new TransactionHistory.Builder().setTransaction_id(432).setBook_id(book1).setBuyer(buyer1).setSeller(seller1).setDate(LocalDate.now()).build();
+        TransactionHistory transactionHistory = new TransactionHistory.Builder().setTransactionID(432).setBookID(book1).setUser(seller1).setDate(LocalDate.now()).build();
         historyService.create(transactionHistory);
 
         transactionHistories.add(transactionHistory);
@@ -101,5 +100,5 @@ class OrderServiceTest {
         System.out.println(allOrder);
     }
 
-    */
+
 }

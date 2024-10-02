@@ -9,7 +9,7 @@ class AdminFactoryTest {
 
     @Test
     void testCreateAdmin_ValidInputs() {
-        Long adminID = 1L;
+        Integer adminID = Math.toIntExact(Long.valueOf(1));
         String name = "John Doe";
         String email = "john@example.com";
         String password = "securePassword";
@@ -33,25 +33,25 @@ class AdminFactoryTest {
 
     @Test
     void testCreateAdmin_EmptyName() {
-        Admin admin = AdminFactory.createAdmin(1L, "", "john@example.com", "securePassword", "1234567890");
+        Admin admin = AdminFactory.createAdmin(1, "", "john@example.com", "securePassword", "1234567890");
         assertNull(admin);
     }
 
     @Test
     void testCreateAdmin_EmptyEmail() {
-        Admin admin = AdminFactory.createAdmin(1L, "John Doe", "", "securePassword", "1234567890");
+        Admin admin = AdminFactory.createAdmin(1, "John Doe", "", "securePassword", "1234567890");
         assertNull(admin);
     }
 
     @Test
     void testCreateAdmin_EmptyPassword() {
-        Admin admin = AdminFactory.createAdmin(1L, "John Doe", "john@example.com", "", "1234567890");
+        Admin admin = AdminFactory.createAdmin(1, "John Doe", "john@example.com", "", "1234567890");
         assertNull(admin);
     }
 
     @Test
     void testCreateAdmin_EmptyPhoneNumber() {
-        Admin admin = AdminFactory.createAdmin(1L, "John Doe", "john@example.com", "securePassword", "");
+        Admin admin = AdminFactory.createAdmin(1, "John Doe", "john@example.com", "securePassword", "");
         assertNull(admin);
     }
 }
