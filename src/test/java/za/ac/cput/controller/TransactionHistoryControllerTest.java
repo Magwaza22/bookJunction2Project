@@ -74,6 +74,7 @@ class TransactionHistoryControllerTest {
         assertEquals(testTransactionHistory.getTransactionID(), response.getBody().getTransactionID());
         assertEquals(testTransactionHistory.getBookID(), response.getBody().getBookID());
         assertEquals(testTransactionHistory.getUser(), response.getBody().getUser());
+
     }
 
     }

@@ -87,7 +87,8 @@ class ListingControllerTest {
             assertEquals(HttpStatus.OK, response.getStatusCode());
             assertNotNull(response.getBody());
             assertEquals(1, response.getBody().size());  // We expect 1 listing from the setup
-        }
+
+    }
 
     }
 
