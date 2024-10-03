@@ -81,6 +81,6 @@ class TransactionHistoryFactoryTest {
         assertEquals(transactionID, transactionHistory.getTransactionID());
         assertEquals(book, transactionHistory.getBookID());
         assertEquals(user, transactionHistory.getUser());
-        assertEquals(date, transactionHistory.getDate());
+    assertEquals(date, transactionHistory.getDate());
     }
 }
