@@ -29,8 +29,8 @@ class NotificationServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        notification = new Notification(); // Initialize with appropriate fields
-        notification.setId(1); // Assuming there's an ID field.
+        notification = new Notification();
+        notification.getUserID(1);
         notification.setMessage("Test notification");
     }
 
