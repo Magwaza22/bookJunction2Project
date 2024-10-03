@@ -88,6 +88,7 @@ class ListingControllerTest {
             assertNotNull(response.getBody());
             assertEquals(1, response.getBody().size());  // We expect 1 listing from the setup
         }
+
     }
 
 

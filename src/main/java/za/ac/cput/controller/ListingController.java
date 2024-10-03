@@ -29,4 +29,5 @@ public class ListingController {
 
     @GetMapping("/getall")
     public List<Listing> getAll(){return service.getall();}
+
 }

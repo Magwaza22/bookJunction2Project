@@ -19,5 +19,4 @@ public class TransactionHistoryController {
 
     @GetMapping("/read")
     public TransactionHistory read(@PathVariable Integer id) { return service.read(id);}
-
 }
