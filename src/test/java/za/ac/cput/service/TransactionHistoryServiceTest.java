@@ -101,7 +101,7 @@ class TransactionHistoryServiceTest {
     @Test
     void update() {
         // Update the description of the existing transaction
-        TransactionHistory newTransactionHistory = new TransactionHistory.Builder().copy(testTransaction).setBookID(246).build();
+        TransactionHistory newTransactionHistory = new TransactionHistory.Builder().copy(testTransaction).setBookID(24).build();
         TransactionHistory updatedTransaction = transactionHistoryService.update(testTransaction);
 
 
