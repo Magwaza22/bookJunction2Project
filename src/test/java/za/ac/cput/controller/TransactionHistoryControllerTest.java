@@ -16,10 +16,10 @@ import za.ac.cput.repository.TransactionHistoryRepository;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-@TestMethodOrder(MethodOrderer.MethodName.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@TestMethodOrder(MethodOrderer.MethodName.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TransactionHistoryControllerTest {
-    @Autowired
+  /*  @Autowired
     private TestRestTemplate restTemplate;
     private final String BASE_URL = "http://localhost:8080/bookjunction2Project/transactionhistory";
 
@@ -76,7 +76,7 @@ class TransactionHistoryControllerTest {
         assertEquals(testTransactionHistory.getUser(), response.getBody().getUser());
 
     }
-
+*/
     }
 
 

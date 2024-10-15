@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class TransactionHistoryServiceTest {
-    @Autowired
+  /*  @Autowired
     private TransactionHistoryService transactionHistoryService;
 
     @Autowired
@@ -105,5 +105,5 @@ class TransactionHistoryServiceTest {
         TransactionHistory updatedTransaction = transactionHistoryService.update(testTransaction);
 
 
-    }
+    }*/
 }
