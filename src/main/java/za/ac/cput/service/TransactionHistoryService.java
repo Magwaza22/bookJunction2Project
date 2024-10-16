@@ -2,7 +2,6 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.domain.Book;
 import za.ac.cput.domain.TransactionHistory;
 import za.ac.cput.repository.TransactionHistoryRepository;
 
@@ -24,6 +23,10 @@ public class TransactionHistoryService implements ITransactionHistoryService{
 
     @Override
     public TransactionHistory update(TransactionHistory transactionHistory){return transactionHistoryRepository.save(transactionHistory);
+    }
+    @Override
+    public List<TransactionHistory> getall() {
+        return transactionHistoryRepository.findAll();
     }
     }
 
