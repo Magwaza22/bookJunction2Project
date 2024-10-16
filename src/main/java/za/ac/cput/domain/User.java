@@ -78,6 +78,9 @@ public class User implements Serializable {
                 '}';
     }
 
+    public void setPassword(String encode) {
+    }
+
     public static class UserBuilder {
         private Integer userId;
         private String firstName;
