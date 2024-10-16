@@ -5,16 +5,20 @@ import za.ac.cput.util.Helper;
 
 public class UserFactory {
 
-    public static User createUser(Integer userId, String name, String email, String phoneNumber) {
-        if (userId == null || userId <= 0 || Helper.isNullOrEmpty(name) || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(phoneNumber)) {
+    public static User createUser(Integer userId, String firstName, String lastName, String email, String phoneNumber, String password) {
+        if (userId == null || userId <= 0 || Helper.isNullOrEmpty(firstName)
+                || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(email)
+                || Helper.isNullOrEmpty(phoneNumber) || Helper.isNullOrEmpty(password) ) {
             return null;
         }
 
         return new User.UserBuilder()
                 .setUserId(userId)
-                .setName(name)
+                .setFirstName(firstName)
+                .setLastName(lastName)
                 .setEmail(email)
                 .setPhoneNumber(phoneNumber)
+                .setPassword(password)
                 .build();
     }
 
