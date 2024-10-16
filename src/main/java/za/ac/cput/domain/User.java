@@ -11,26 +11,34 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phoneNumber;
+    private String password;
 
     public User() {
     }
 
     protected User(UserBuilder builder) {
         this.userId = builder.userId;
-        this.name = builder.name;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
         this.email = builder.email;
         this.phoneNumber = builder.phoneNumber;
+        this.password = builder.password;
     }
 
-    public Integer getUserId() {  // Change return type to Integer
+    public Integer getUserId() {
         return userId;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -41,44 +49,56 @@ public class User implements Serializable {
         return phoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return Objects.equals(getUserId(), user.getUserId()) &&
-                Objects.equals(getName(), user.getName()) &&
-                Objects.equals(getEmail(), user.getEmail()) &&
-                Objects.equals(getPhoneNumber(), user.getPhoneNumber());
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userId, user.userId) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getName(), getEmail(), getPhoneNumber());
+        return Objects.hash(userId, firstName, lastName, email, phoneNumber, password);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +  // Change from String to Integer
-                ", name='" + name + '\'' +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 
     public static class UserBuilder {
-        protected Integer userId;  // Change from String to Integer
-        protected String name;
-        protected String email;
-        protected String phoneNumber;
+        private Integer userId;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String phoneNumber;
+        private String password;
 
-        public UserBuilder setUserId(Integer userId) {  // Change from String to Integer
+
+        public UserBuilder setUserId(Integer userId) {
             this.userId = userId;
             return this;
         }
 
-        public UserBuilder setName(String name) {
-            this.name = name;
+        public UserBuilder setFirstName(String firstName) {
+            this. firstName= firstName;
+            return this;
+        }
+
+        public UserBuilder setLastName(String lastName) {
+            this.lastName = lastName;
             return this;
         }
 
@@ -92,11 +112,18 @@ public class User implements Serializable {
             return this;
         }
 
+        public UserBuilder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
         public UserBuilder copy(User user) {
             this.userId = user.userId;
-            this.name = user.name;
+            this.firstName = user.firstName;
+            this.lastName = user.lastName;
             this.email = user.email;
             this.phoneNumber = user.phoneNumber;
+            this.password = user.password;
             return this;
         }
 
