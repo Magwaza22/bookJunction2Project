@@ -16,17 +16,14 @@ public class TransactionHistoryService implements ITransactionHistoryService{
 
     @Override
     public TransactionHistory create(TransactionHistory transactionHistory) {
-        return null;
+        return transactionHistoryRepository.save(transactionHistory);
     }
 
     @Override
-    public TransactionHistory read(Integer integer) {
-        return null;
-    }
+    public TransactionHistory read(Integer integer) {return transactionHistoryRepository.findById(integer).orElse(null);}
 
     @Override
-    public TransactionHistory update(TransactionHistory transactionHistory) {
-        return null;
+    public TransactionHistory update(TransactionHistory transactionHistory){return transactionHistoryRepository.save(transactionHistory);
     }
     }
 
