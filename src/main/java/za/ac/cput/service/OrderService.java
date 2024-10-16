@@ -17,6 +17,7 @@ public class OrderService  implements IOrderService{
 
     @Override
     public Order create(Order order) {
+        System.out.println("Order data from service: " + order);
         return orderRepository.save(order);
     }
 
