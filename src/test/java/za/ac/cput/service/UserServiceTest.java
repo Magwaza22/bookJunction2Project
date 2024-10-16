@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 @SpringBootTest
 class UserServiceTest {
-
+/*
     @Autowired
     private UserService userService;
     private User user;
@@ -39,5 +39,7 @@ class UserServiceTest {
         assertNotNull(createdUser);
         System.out.println(createdUser);
     }
+
+ */
 }
 

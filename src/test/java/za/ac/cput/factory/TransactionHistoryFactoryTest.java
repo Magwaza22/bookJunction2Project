@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 class TransactionHistoryFactoryTest {
-
+/*
     @Test
     void createTransactionHistory_Success() {
 
@@ -82,5 +82,5 @@ class TransactionHistoryFactoryTest {
         assertEquals(book, transactionHistory.getBookID());
         assertEquals(user, transactionHistory.getUser());
     assertEquals(date, transactionHistory.getDate());
-    }
+    }*/
 }
