@@ -6,7 +6,7 @@ import za.ac.cput.domain.TransactionHistory;
 import za.ac.cput.service.TransactionHistoryService;
 
 @RestController
-@RequestMapping("/transactionHistory")
+@RequestMapping("/transaction_history")
 public class TransactionHistoryController {
 
     private final TransactionHistoryService service;

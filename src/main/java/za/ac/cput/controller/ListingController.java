@@ -9,7 +9,7 @@ import za.ac.cput.service.ListingService;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/listing")
 public class ListingController {
     private final ListingService service;
 
