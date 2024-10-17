@@ -2,12 +2,8 @@ package za.ac.cput.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import za.ac.cput.domain.Notification;
-
-import za.ac.cput.service.BookService;
 import za.ac.cput.service.NotificationService;
-
 import java.util.List;
 
 @RestController

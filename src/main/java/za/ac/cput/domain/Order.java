@@ -110,6 +110,11 @@ public class Order {
             return this;
         }
 
+        public Builder setUserId(User userId) {
+            this.userId = userId;
+            return this;
+        }
+
         public Builder copy(Order o) {
             this.orderID = o.orderID;
             this.userId = o.userId;
