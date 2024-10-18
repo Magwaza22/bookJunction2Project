@@ -56,7 +56,7 @@ class RatingServiceTest {
     @Order(3)
     void c_read() {
         Rating read1 = rs.read(rate1.getId());
-        //assertNotNull(read1, "Reading Rate1 failed.");
+        assertNotNull(read1, "Reading Rate1 failed.");
         System.out.println(read1);
     }
 

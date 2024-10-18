@@ -3,6 +3,7 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.domain.Book;
 import za.ac.cput.domain.Rating;
 import za.ac.cput.domain.User;
 import za.ac.cput.repository.RatingRepository;
@@ -35,12 +36,15 @@ public class RatingService implements IRatingService{
     }
 
     @Override
-    public void FindRatingByUser(User id) {
-
+    public List<Rating> getAll() { return List.of();
     }
 
     @Override
-    public List<Rating> getAll(Rating id) {
-        return rrepo.findAll();
+    public void FindRatingByUser(User id) {
+  
     }
+
+
 }
+
+

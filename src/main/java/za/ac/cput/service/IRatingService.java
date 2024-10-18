@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface IRatingService extends IService<Rating, Integer>{
 
-    List getAll(Rating id);
+    List<Rating> getAll();
 
     void FindRatingByUser(User id);
 
