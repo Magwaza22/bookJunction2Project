@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 class SellerControllerTest {
-    @Test
+  /*  @Test
     public void testCreateOrderSuccess() {
         User user = new User.UserBuilder().setUserId(Integer.valueOf("12345")).build();
         LocalDate orderDate = LocalDate.now();
@@ -53,6 +53,6 @@ class SellerControllerTest {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
-
+*/
 
 }

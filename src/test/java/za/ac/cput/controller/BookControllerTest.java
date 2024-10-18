@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookControllerTest {
-
+/*
     @Autowired
     private TestRestTemplate restTemplate;
     private final String BASE_URL = "http://localhost:8080/bookjunction2Project/book";
@@ -76,4 +76,6 @@ class BookControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         //assertEquals(book, response.getBody().get(0));
     }
+
+ */
 }

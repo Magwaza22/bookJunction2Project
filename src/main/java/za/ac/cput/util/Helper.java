@@ -23,10 +23,6 @@ public class Helper {
         return false;
     }
 
-    public static boolean generateId() {
-        return true;
-    }
-
     public static boolean isValidEmail(String email) {
         boolean result = true;
         try {

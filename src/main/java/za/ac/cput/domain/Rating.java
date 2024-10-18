@@ -2,6 +2,9 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
@@ -17,7 +20,17 @@ public class Rating {
     private int deliveryRating;
     private int accuracyOfRating;
     private LocalDate date;
+    @OneToOne
+    @JoinColumn(name = "user_user_id")
     private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Rating(){}
 

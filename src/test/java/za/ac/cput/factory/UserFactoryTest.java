@@ -9,12 +9,14 @@ class UserFactoryTest {
 
     @Test
     void testCreateUser_ValidInputs() {
-        User user = UserFactory.createUser(123, "John Doe", "john@example.com", "1234567890");
+        User user = UserFactory.createUser("John", "Doe", "john@example.com", "1234567890","Jon#11");
         assertNotNull(user);
-        assertEquals(123, user.getUserId());
-        assertEquals("John Doe", user.getName());
+        assertNull(user.getUserId());
+        assertEquals("John", user.getFirstName());
+        assertEquals("Doe", user.getLastName());
         assertEquals("john@example.com", user.getEmail());
         assertEquals("1234567890", user.getPhoneNumber());
+        assertEquals("Jon#11", user.getPassword());
     }
 }
 

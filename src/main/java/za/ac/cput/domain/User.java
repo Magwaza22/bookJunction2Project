@@ -20,37 +20,61 @@ public class User implements Serializable {
     public User() {
     }
 
-    protected User(UserBuilder builder) {
-        this.userId = builder.userId;
-        this.firstName = builder.firstName;
-        this.lastName = builder.lastName;
-        this.email = builder.email;
-        this.phoneNumber = builder.phoneNumber;
-        this.password = builder.password;
+    public User(Integer userId, String firstName, String lastName, String email, String phoneNumber, String password) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
     public Integer getUserId() {
         return userId;
     }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -68,63 +92,13 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return null;
-    }
-
-    public void setPassword(String encode) {
-    }
-
-    public static class UserBuilder {
-        private Integer userId;
-        private String firstName;
-        private String lastName;
-        private String email;
-        private String phoneNumber;
-        private String password;
-
-
-        public UserBuilder setUserId(Integer userId) {
-            this.userId = userId;
-            return this;
-        }
-
-        public UserBuilder setFirstName(String firstName) {
-            this. firstName= firstName;
-            return this;
-        }
-
-        public UserBuilder setLastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public UserBuilder setEmail(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public UserBuilder setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-            return this;
-        }
-
-        public UserBuilder setPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public UserBuilder copy(User user) {
-            this.userId = user.userId;
-            this.firstName = user.firstName;
-            this.lastName = user.lastName;
-            this.email = user.email;
-            this.phoneNumber = user.phoneNumber;
-            this.password = user.password;
-            return this;
-        }
-
-        public User build() {
-            return new User(this);
-        }
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Entity
 public class Seller extends User{
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private Set<TransactionHistory> inventory;
 
@@ -18,12 +19,16 @@ public class Seller extends User{
     }
 
     public Seller(Builder builder) {
-        super(builder);
+        super(builder.userId, builder.firstName, builder.lastName, builder.email, builder.phoneNumber, builder.password);  // Call User constructor
         this.inventory = builder.inventory;
     }
 
     public Set<TransactionHistory> getInventory() {
         return inventory;
+    }
+
+    public void setInventory(Set<TransactionHistory> inventory) {
+        this.inventory = inventory;
     }
 
     @Override
@@ -47,22 +52,73 @@ public class Seller extends User{
                 '}';
     }
 
-    public static class Builder extends UserBuilder{
+    public static class Builder {
+        // User fields inherited from User class
+        private Integer userId;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String phoneNumber;
+        private String password;
+
+        // Seller-specific field
         private Set<TransactionHistory> inventory;
 
+        // Builder methods for User fields
+        public Builder setUserId(Integer userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        // Builder method for Seller's inventory
         public Builder setInventory(Set<TransactionHistory> inventory) {
             this.inventory = inventory;
             return this;
         }
 
-        public Builder copy(User user){
-            if(user instanceof Seller){
-                super.copy(user);
+        // Copy method for building Seller object from User instance
+        public Builder copy(User user) {
+            this.userId = user.getUserId();
+            this.firstName = user.getFirstName();
+            this.lastName = user.getLastName();
+            this.email = user.getEmail();
+            this.phoneNumber = user.getPhoneNumber();
+            this.password = user.getPassword();
+
+            if (user instanceof Seller) {
                 this.inventory = ((Seller) user).inventory;
             }
             return this;
         }
 
-        public Seller build(){return new Seller(this);}
+        // Build method for creating a Seller instance
+        public Seller build() {
+            return new Seller(this);
+        }
     }
 }
