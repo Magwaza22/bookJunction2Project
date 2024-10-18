@@ -9,7 +9,7 @@ import za.ac.cput.service.TransactionHistoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transactionHistory")
+@RequestMapping("/transaction_history")
 public class TransactionHistoryController {
 
     private final TransactionHistoryService service;
@@ -22,6 +22,7 @@ public class TransactionHistoryController {
 
     @GetMapping("/read")
     public TransactionHistory read(@PathVariable Integer id) { return service.read(id);}
+
     @GetMapping("/getall")
     public List<TransactionHistory> getAll(){return service.getall();}
 
