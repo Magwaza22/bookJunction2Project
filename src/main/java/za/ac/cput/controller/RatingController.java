@@ -40,6 +40,6 @@ public class RatingController {
     }
 
     @GetMapping("/getall")
-    public List<Rating> getAll(){return ratingService.getAll();}
+    public List<Rating> getAll(){return ratingService.getAll() ;}
 
 }

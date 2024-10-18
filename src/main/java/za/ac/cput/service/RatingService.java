@@ -36,8 +36,7 @@ public class RatingService implements IRatingService{
     }
 
     @Override
-    public List<Rating> getAll() {
-        return List.of();
+    public List<Rating> getAll() { return List.of();
     }
 
     @Override
