@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Book;
 import za.ac.cput.domain.Rating;
 import za.ac.cput.service.RatingService;
-
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/rating")
 public class RatingController {
