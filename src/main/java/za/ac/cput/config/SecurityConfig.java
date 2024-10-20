@@ -1,6 +1,9 @@
 package za.ac.cput.config;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.web.cors.CorsConfiguration;
 import za.ac.cput.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,10 +31,26 @@ public class SecurityConfig {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http
                     .csrf(AbstractHttpConfigurer::disable)
+                    .cors(cors-> cors.configurationSource(request-> {var corsConfiguration = new CorsConfiguration();
+                        corsConfiguration.setAllowCredentials(true);
+                        corsConfiguration.addAllowedOrigin("http://localhost:5173/"); //Http:://localhost:5173
+                        corsConfiguration.addAllowedHeader("*");
+                        corsConfiguration.addAllowedMethod("*");
+                        return corsConfiguration;
+                    }))
+                    .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                            .maximumSessions(1)
+                    )
+                    .exceptionHandling(exception->exception.authenticationEntryPoint((request, response, authException) -> {
+                        System.out.println("AuthenticationEntryPoint failed : " +authException.getMessage());
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                    }))
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers("/auth/**").permitAll()
                             .anyRequest().authenticated()
+
                     );
+
 
             return http.build();
         }
